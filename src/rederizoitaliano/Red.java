@@ -18,7 +18,7 @@ public class Red {
 //        private int compara;      // numero que va a comparar con el ifr en evolveBooleanSwitch
 
     public Red(String dirTablas, String[] nombres) {
-        nn = MetodosMayo12.creaRed(dirTablas, nombres);
+        nn = Methods.creaRed(dirTablas, nombres);
         size = nn.length;
         numPresentes = size;
         numAusentes = 0;
@@ -125,7 +125,7 @@ public class Red {
      *
      */
     public void evolveKauffman() {
-        MetodosMayo12.evolveBoolean(nn);
+        Methods.evolveBoolean(nn);
 
     }
 
@@ -135,14 +135,14 @@ public class Red {
      * @param nodoACambiar el nodo al que se le cambia la función
      */
     public void evolveKauffmanSwitch(int compara, int nodoACambiar) {
-        MetodosMayo12.evolveBooleanSwitch(nn, compara, nodoACambiar);
+        Methods.evolveBooleanSwitch(nn, compara, nodoACambiar);
     }
 
     public void evolveKauffmanMayoria(Red r1, Red r2, Red r3){
         Nodo[] n1 = r1.nn;
         Nodo[] n2 = r2.nn;
         Nodo[] n3 = r3.nn;
-        MetodosMayo12.evolveReglaMayoria(n1, n2, n3);
+        Methods.evolveReglaMayoria(n1, n2, n3);
     }
     
 //    public void evolveKauffmanMayoriaChida(Red[] r, int numNodos){
@@ -151,26 +151,26 @@ public class Red {
 ////        for(int n = 0; n < numNodos; ++n){
 ////            nodo.add(n, nn);
 ////        }
-//        MetodosMayo12.evolveReglaMayoriaChida(numNodos, nodo);
+//        Methods.evolveReglaMayoriaChida(numNodos, nodo);
 //    }
     
     public void evolveKauffmanCoupled(Red r1, Red r2, Red r3, double eps, double div, int pos, double rounder2, double rounder, int NodoAcoplador) {
         Nodo[] nodo1 = r1.nn;
         Nodo[] nodo2 = r2.nn;
         Nodo[] nodo3 = r3.nn;
-        MetodosMayo12.evolveCoupled(nodo1, nodo2, nodo3, eps, div, pos, rounder2, rounder, NodoAcoplador);
+        Methods.evolveCoupled(nodo1, nodo2, nodo3, eps, div, pos, rounder2, rounder, NodoAcoplador);
     }
 
     public void evolveKauffmanCola(Red r1, Red r2, double eps, double div, int pos) {
         Nodo[] nodo1 = r1.nn;
         Nodo[] nodo2 = r2.nn;
-        MetodosMayo12.evolveCola(nodo1, nodo2, eps, div, pos);
+        Methods.evolveCola(nodo1, nodo2, eps, div, pos);
     }
 
     public void evolveKauffmanCuello(Red r1, Red r2, double eps, double div, int pos) {
         Nodo[] nodo1 = r1.nn;
         Nodo[] nodo2 = r2.nn;
-        MetodosMayo12.evolveCuello(nodo1, nodo2, eps, div, pos);
+        Methods.evolveCuello(nodo1, nodo2, eps, div, pos);
     }
 
     /**

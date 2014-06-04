@@ -52,7 +52,7 @@ public class Attractor {
         }
         else{
             for(int l = 0; l < a.getNumStates(); ++l){
-                b = MetodosMayo12.arrayEquals(st[0], a.getState(l));
+                b = Methods.arrayEquals(st[0], a.getState(l));
                 if(b){
                     return b;
                 }

@@ -26,7 +26,7 @@ import java.util.Arrays;
 import jsc.datastructures.PairedData;
 import jsc.regression.PearsonCorrelation;
 
-public class MetodosMayo12 {
+public class Methods {
 
     /**
      * En este metodo se genera la red leyendo los datos de los archivos.
@@ -1212,7 +1212,7 @@ public class MetodosMayo12 {
         //agarra los arreglos que llevan a periodo 8 y que a partir de esos corra
         //la dinamica, a ver a donde chingaos llega con todos y sin uno
 
-        Metodos.findFirstArrayToPeriod8(r);
+//        Metodos.findFirstArrayToPeriod8(r);
 
         int N = r.getSize();
         int tMax = 80;

@@ -10,7 +10,7 @@ import java.io.*;
 import fileOperations.*;
 import java.util.*;
 
-public class Main {
+public class main {
 
     public static void main(String[] args) {
         // Definimos un vector con los nombres de los archivos

@@ -223,7 +223,7 @@ int contadorRenglones =0;
             }
 //        }//linea chucho cierra for fila
             Integer M;
-            m = MetodosMayo12.ternaryToInt(nt);
+            m = Methods.ternaryToInt(nt);
             M=m;
 //            table.add(m);//linea chucho
 
@@ -240,7 +240,7 @@ int contadorRenglones =0;
 
 //              System.out.println("nodo " + n + " Size " +table.size() + "valor del renglon " +  table.get(reng));
 //             if(funReg[m]!=-1){//linea chucho
-//int k = MetodosMayo12.ternaryToInt(nt);
+//int k = Methods.ternaryToInt(nt);
 //                table.add(k);//linea chucho
 //                }
             
