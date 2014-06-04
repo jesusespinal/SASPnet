@@ -19,3 +19,8 @@ These routines include the construction of a network, based on logical rules.
  - Creation of histograms
  - correlations
 
+
+NetBeans
+========
+
+We've bundled proper NetBeans environment. You can probably just open this project as a NetBeans project.
