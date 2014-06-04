@@ -67,10 +67,6 @@ public class Attractor {
         return basin;
     }
 
-    ///lineas chucho, es para resetear los atractores
-    ///
-    ///maldita sea
-
     public int resBasin(){
         resetBasin =0;
         return resetBasin;

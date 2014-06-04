@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 /*
  * This is the core of subroutines whith which I developed 
  * my PhD studies. ONly thing you need is copy and paste
@@ -30,6 +22,7 @@ public class Methods {
 
     /**
      * En este metodo se genera la red leyendo los datos de los archivos.
+     *
      * @param directorio
      * @param nombres. El arreglo con el nombre de los nodos
      * @return red. Regresa un arreglo con los nodos ya inicializados
@@ -46,8 +39,9 @@ public class Methods {
     }
 
     /**
-     * Este metodo evoluciona la red un paso de tiempo utilizando
-     * la dinamica de Glass.
+     * Este metodo evoluciona la red un paso de tiempo utilizando la dinamica de
+     * Glass.
+     *
      * @param nn Arreglo de nodos
      * @param dt Paso de integracion para la ecuacion diferencial
      * @param red. La red que vamos a usar.
@@ -66,8 +60,6 @@ public class Methods {
             file = "Glass/Glass_" + "" + ".dat";
             fw = new FileToWrite(file);
 
-
-
 //        int N = nn.length;                              //numero de nodos
             double[] nC = new double[N];                    //arreglo de dobles de tamaño del número de nodos, para guardar variables continuas
             double a, x;
@@ -78,11 +70,9 @@ public class Methods {
             //valores para cada nodo, es decir que cada variable
             //arriba definida, tomará valores correspondientes
             //al estado del nodo que le toca
-
             for (int i = 0; i < N; ++i) {
                 nr = nn[i].getNumReg();                     //guarda en nr el # de reguladores de cada uno de los nodos
                 stR = new int[nr];                          //stR es un array de tamaño del # de reguladores del nodo i
-
 
                 for (int m = 0; m < nr; ++m) {                //hasta este momento se le va a poner valor a los reguladores
                     j = nn[i].getReg(m);                    //"j" es el valor del regulador "1-m" del nodo nn[i].
@@ -145,6 +135,7 @@ public class Methods {
 
     /**
      * Evoluciona la red con la dinamica de Kauffman.
+     *
      * @param nn Arreglo de nodos.
      */
     public static void evolveBoolean(Nodo[] nn) {
@@ -168,7 +159,6 @@ public class Methods {
                 nt[m] = nn[i].getS();          //adquirir el valor designado por getS() que da el
             }                                  //valor del estado que debe tener
 
-
             ifr = ternaryToInt(nt);
             nuevoEstado[n] = nn[n].getFuncVal(ifr);
         }
@@ -188,8 +178,9 @@ public class Methods {
     }
 
     /**
-     * Evoluciona la red con la dinamica de Kauffman cuando todos
-     * los nodos son booleanos
+     * Evoluciona la red con la dinamica de Kauffman cuando todos los nodos son
+     * booleanos
+     *
      * @param nn Arreglo de nodos.
      * @param compara, el entero que sale del ternario
      * @param nodoACambiar, indice del nodo al que se le cambia la función
@@ -235,8 +226,9 @@ public class Methods {
     }
 
     /**
-     * Convierte un arreglo con la representacion en base tres de un
-     * numero a su entero en base 10.
+     * Convierte un arreglo con la representacion en base tres de un numero a su
+     * entero en base 10.
+     *
      * @param nt
      * @return numero, el entero que se ha convertido
      */
@@ -252,8 +244,9 @@ public class Methods {
     }
 
     /**
-     * Convierte a ternario un entero dado, guardándolo en un
-     * arreglo, inicialmente llenado con 0's
+     * Convierte a ternario un entero dado, guardándolo en un arreglo,
+     * inicialmente llenado con 0's
+     *
      * @param nt el número entero a convertir
      * @param b el arreglo donde va a guardar el ternnario
      */
@@ -283,8 +276,9 @@ public class Methods {
     }
 
     /**
-     * Convierte un número binario guardado en
-     * un arreglo "nt", en un entero llamado "numero"
+     * Convierte un número binario guardado en un arreglo "nt", en un entero
+     * llamado "numero"
+     *
      * @param nt el arreglo que contiene el binario
      * @return numero, el entero ya convertido
      */
@@ -300,8 +294,9 @@ public class Methods {
     }
 
     /**
-     * Convierte a binario un entero dado guardándolo en un
-     * arreglo, inicialmente llenado con 0's
+     * Convierte a binario un entero dado guardándolo en un arreglo,
+     * inicialmente llenado con 0's
+     *
      * @param nt el número entero a convertir
      * @param b el arreglo donde va a guardar el binario
      */
@@ -331,53 +326,9 @@ public class Methods {
     }
 
     /**
-     * Sepa la chingada que chingaos hace este pinche método jajajaja
-     * @param r la Red
-     * @param numNodo el número del nodo? jajajajaja
-     */
-    /*
-    public static void ArregloEnteroTabla(Red[] r, Nodo[] numNodo) {
-
-        ArrayList Enteros = new ArrayList();
-        int N = r.length;                          //N tiene el tamaño de la red
-//System.out.println(compara);
-        int[] nuevoEstado = new int[N];             //vector de tamaño N donde guarda
-        //el estado nuevo (o sea t+1)
-        int ifr, i, m, n, nr;
-        int numRenglones = 1;
-        int[] nt;
-
-//        for (int IndArrComp = 0; IndArrComp < ArrComparison.length; ++IndArrComp) {
-
-        for (n = 0; n < N; ++n) {               //for para cada nodo de la red
-            numRenglones = 1;
-//            for(terToCompare=0; terToCompare<(Math.pow(3.0,nn[n].numReg));++terToCompare){
-            nr = numNodo[n].getNumReg();            //"nr" guarda el número de reguladores del nodo N
-            nt = new int[nr];                  //"nt" vector que guarda el núm d regs. de N
-
-            for (m = 0; m < nr; ++m) {         //ESTE ES DENTRO DEL NODO, SU NUM DE REGULADORES
-
-                //dame el indice del regulador "m" del
-                i = numNodo[n].getReg(m);           //del nodo "n" y guardalo en "i"
-                if (numNodo[i].binario) {
-                    numRenglones *= 2;
-                } else {
-                    numRenglones *= 3;
-                }
-
-                //el regulador n del nodo i va a
-                nt[m] = numNodo[i].getS();          //adquirir el valor designado por getS() que da el
-            }                                  //valor del estado que debe tener
-            ifr = ternaryToInt(nt);
-
-            Enteros.set(1, ifr);
-        }
-    }
-*/
-    
-    /**
-     * Hace la matriz de transferencia de atractores de periodo
-     * a periodo 8 y viceversa
+     * Hace la matriz de transferencia de atractores de periodo a periodo 8 y
+     * viceversa
+     *
      * @param r la Red
      * @param iC Condiciones iniciales
      * @return 0
@@ -408,38 +359,28 @@ public class Methods {
         System.out.println();
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < N; ++j) {
-
                 sum[i][j] /= iC;
-
-//                VectSum[i] += sum[i][j];
-
             }
-//             System.out.println();
-
 
             System.out.print(i + "\t");
             for (int ii = 0; ii < N; ++ii) {
-
-//                sum[i][ii] /= VectSum[i];
-
                 System.out.print((sum[i][ii]) + "\t\t\t");
             }
             System.out.println();
         }
-//        }
         return 0;
     }
 
     /**
-     * Este metodo calcula el mapeo de Derrida sin un nodo.
-     * Este mapeo calcula la distancia de Hamming que hay entre 2 redes
-     * a un tiempo "t+1", partiendo de una distancia "d", a un tiempo "t"
-     * Se generan 2 redes, las cuales evolucionan con la misma dinámica
-     * de Kauffman, pero la segunda red, tiene un nodo menos.
-     * Por lo tanto, la red1 evoluciona normal, mientras la red2 evoluciona
-     * sin un nodo.
-     * Se fija la distancia "d" inicial, la dinámica corre un paso y se
-     * recalcula la distancia "d" final. Esos puntos se grafican.
+     * Este metodo calcula el mapeo de Derrida sin un nodo. Este mapeo calcula
+     * la distancia de Hamming que hay entre 2 redes a un tiempo "t+1",
+     * partiendo de una distancia "d", a un tiempo "t" Se generan 2 redes, las
+     * cuales evolucionan con la misma dinámica de Kauffman, pero la segunda
+     * red, tiene un nodo menos. Por lo tanto, la red1 evoluciona normal,
+     * mientras la red2 evoluciona sin un nodo. Se fija la distancia "d"
+     * inicial, la dinámica corre un paso y se recalcula la distancia "d" final.
+     * Esos puntos se grafican.
+     *
      * @param red1, la red original
      * @param red2 la red que se va a mover una distancia "d"
      */
@@ -456,10 +397,7 @@ public class Methods {
         }
         red1.getNodo(del).setPresente(false);
         red1.getNodo(14).setPresente(false);
-//            red2.getNodo(del).setPresente(false);
-//            file = "DerridaTotNuevasTablas" + red1.getNodo(del).getName()
-//                    +  ".dat";
-//            file = "/home/chucho/Desktop/ModeloCatsper/Hamming/Sin_" + red1.getNodo(del).getName() + ".dat";
+
         fw = new FileToWrite(file);
         for (int d = 0; d <= (2 * red1.getSize() / 3); ++d) {
             d1 = 0;
@@ -482,13 +420,13 @@ public class Methods {
     }
 
     /**
-     * setDistance ORIGINAL
-     * Recibe dos redes, y pone los estados de la segunda red
-     * iguales a los estados de la primera red con una probabilidad "d".
+     * setDistance ORIGINAL Recibe dos redes, y pone los estados de la segunda
+     * red iguales a los estados de la primera red con una probabilidad "d".
      * Esto hace que las dos redes tengan una distancia hamming d.
+     *
      * @param r1 La primera red. Esta no cambia.
      * @param r2 La segunda red. Los estados seran iguales a r1 con prob. "d"
-     * @param d  La distancia Hamming que se quiere tener entre las redes.
+     * @param d La distancia Hamming que se quiere tener entre las redes.
      */
     public static void setDistance(Red r1, Red r2, int d) {
         int N = r1.getSize();
@@ -534,6 +472,7 @@ public class Methods {
 
     /**
      * Este metodo calcula el mapeo de Derrida ORIGINAL a muchos pasos.
+     *
      * @param red1 la red original
      * @param red2 la red que se va a comparar
      */
@@ -552,7 +491,6 @@ public class Methods {
         }
 //            red1.getNodo(ink).setPresente(false);
 //            red2.getNodo(ink).setPresente(false);
-
 
 //            file = "/home/chucho/Desktop/ModeloCatsper/Hamming/Derrida.dat";
         fw = new FileToWrite(file);
@@ -602,13 +540,12 @@ public class Methods {
     }
 
     /**
-     * Este metodo calcula el mapeo de Derrida Realmente GRANDE.
-     * Lo puse aqui para quitarlo del Main.
+     * Este metodo calcula el mapeo de Derrida Realmente GRANDE. Lo puse aqui
+     * para quitarlo del Main.
      */
     public static void derridaMapXinf(Red red1, Red red2) {
         int N = red1.getSize();
         double S, xinf, xit;
-
 
         int rea = 10000;
 
@@ -642,7 +579,6 @@ public class Methods {
 
                 red1.setRandomStates();
                 setDistance(red1, red2, ic);
-
 
                 //voy a comprobar que el mapeo de derrida es correcto.
                 //primero dejo evolucionar mucho tiempo las dos redes.
@@ -691,7 +627,6 @@ public class Methods {
             fw3.writeLine(i + "\t\t" + ht2[i]);
         }
 
-
         fw.writeLine();
         fw.close();
         fw2.close();
@@ -699,12 +634,13 @@ public class Methods {
     }
 
     /**
-     * Recibe dos redes, y pone los estados de la segunda red
-     * iguales a los estados de la primera red con una probabilidad "d".
-     * Esto hace que las dos redes tengan una distancia hammin d.
+     * Recibe dos redes, y pone los estados de la segunda red iguales a los
+     * estados de la primera red con una probabilidad "d". Esto hace que las dos
+     * redes tengan una distancia hammin d.
+     *
      * @param r1 La primera red. Esta no cambia.
      * @param r2 La segunda red. Los estados seran iguales a r1 con prob. "d"
-     * @param d  La distancia Hamming que se quiere tener entre las redes.
+     * @param d La distancia Hamming que se quiere tener entre las redes.
      * @param ink el índice del nodo que va a utilizar
      */
     public static void setDistance2(Red r1, Red r2, int d, int ink) {
@@ -724,10 +660,8 @@ public class Methods {
 
         st[ink] = M - 1; //no entiendo por que st[ink] es 23
 
-
         --M;
         for (n = 0; n < d; ++n) {
-
 
             i = (int) (M * Math.random());//con este metodo te aseguras de llenar de modo
             rst[n] = st[i];              //aleatorio las casillas de rst[] sin repetir
@@ -771,6 +705,7 @@ public class Methods {
 
     /**
      * Este es el bueno, arriba es el Derrida sin muchos
+     *
      * @param red1
      * @param red2
      */
@@ -781,7 +716,6 @@ public class Methods {
         int rea = 1000;
         String file;
         FileToWrite fw;
-
 
         for (int ink = 0; ink < N; ++ink) {
             System.out.println("Vamos con el nodo " + ink + " = " + red1.getNodo(ink).getName());
@@ -807,7 +741,6 @@ public class Methods {
 
                     red1.setRandomStates();
                     setDistance(red1, red2, ic);
-
 
                     //voy a comprobar que el mapeo de derrida es correcto.
                     //primero dejo evolucionar mucho tiempo las dos redes.
@@ -842,6 +775,7 @@ public class Methods {
 
     /**
      * Calcula la distancia Hamming entre dos redes
+     *
      * @param r1 La primera red
      * @param r2 La segunda red
      * @return Regresa la distancia Hamming
@@ -865,6 +799,7 @@ public class Methods {
 
     /**
      * Compara dos arreglos de enteros para saber si son inguales.
+     *
      * @param a1 Primer arreglo a comparar
      * @param a2 Segudo arreglo a comparar
      * @return Regresa true si a1 = a2; Regresa false si a1 != a2.
@@ -886,8 +821,9 @@ public class Methods {
     }
 
     /**
-     * Encuentra los atractores de la red recorriendo todos los
-     * estados dinamicos.
+     * Encuentra los atractores de la red recorriendo todos los estados
+     * dinamicos.
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @return longTrans número de transitorios largos
      */
@@ -976,6 +912,7 @@ public class Methods {
     /**
      * Encuentra los atractores de la red solamente sampleando los estados
      * dinamicos. Por eso se llama "Under" porque "Undersamplea".
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @param iC El número de condiciones iniciales
      *
@@ -1007,12 +944,12 @@ public class Methods {
             r.setRandomStates();
 
             trj = new int[tMax][N];
-            for (t = 0; t < tMax; ++t) { 
+            for (t = 0; t < tMax; ++t) {
 //                r.getNodo(20).setS(1);
                 r.evolveKauffman();
                 r.getNodo(20).setS(1);
 //                if(t%5 != 0){
-               
+
 //                }
 //                r.getNodo(18).setS(1);
                 trj[t] = r.getStates();
@@ -1057,10 +994,11 @@ public class Methods {
     }
 
     /**
-     * Encuentra los atractores con UNA FUNCION CAMBIADA EN UN SOLO NODO
-     * EN UNA SOLA ENTRADA, BARRIENDO TODAS LAS CONDICIONES INICIALES
-     * de la red solamente sampleando los estados
-     * dinamicos. Por eso se llama "Under" porque "Undersamplea".
+     * Encuentra los atractores con UNA FUNCION CAMBIADA EN UN SOLO NODO EN UNA
+     * SOLA ENTRADA, BARRIENDO TODAS LAS CONDICIONES INICIALES de la red
+     * solamente sampleando los estados dinamicos. Por eso se llama "Under"
+     * porque "Undersamplea".
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @param iC el número de condiciones iniciales que hay
      * @param renglon, el renglon al que se le cambia la función
@@ -1114,9 +1052,6 @@ public class Methods {
             if (l > 0) {
 
                 //aca veo que pedo con el atractor
-
-
-
                 a = new Attractor(l, N);
                 for (k = 0; k < l; ++k) {
                     t = tMax - 1 - l + k;
@@ -1165,9 +1100,7 @@ public class Methods {
 //                    int cuenca2 = a.getBasin();
             prodPeriod *= atr.getNumStates();
 
-
 //                    fw.writeLine(b + "\t\t" + atr.getNumStates() + "\t\t" + cuenca);
-
         }
 
 //                fw.close();
@@ -1190,19 +1123,16 @@ public class Methods {
 //                   fw.close();
 //               }//fin for b
 //            }
-
 //                }
-
 //        }
-
         return longTrans;
     }
 
     /**
-     * Encuentra los atractores de la red PARTIENDO DE
-     * CONDICIONES INICIALES QUE TE LLEVAN A LOS
-     * ATRACTORES DE PERIODO 8 solamente sampleando los estados
+     * Encuentra los atractores de la red PARTIENDO DE CONDICIONES INICIALES QUE
+     * TE LLEVAN A LOS ATRACTORES DE PERIODO 8 solamente sampleando los estados
      * dinamicos. Por eso se llama "Under" porque "Undersamplea".
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @param iC el número de condiciones iniciales a jugar
      */
@@ -1213,7 +1143,6 @@ public class Methods {
         //la dinamica, a ver a donde chingaos llega con todos y sin uno
 
 //        Metodos.findFirstArrayToPeriod8(r);
-
         int N = r.getSize();
         int tMax = 80;
         int[][] trj;
@@ -1277,9 +1206,10 @@ public class Methods {
     }
 
     /**
-     * Encuentra los atractores de la red QUITANDO UN NODO A LA RED
-     * solamente sampleando los estados
-     * dinamicos. Por eso se llama "Under" porque "Undersamplea".
+     * Encuentra los atractores de la red QUITANDO UN NODO A LA RED solamente
+     * sampleando los estados dinamicos. Por eso se llama "Under" porque
+     * "Undersamplea".
+     *
      * @param r La red a la que le va a encontrar los atractores
      */
     public static int findAttUnderSinUno(Red r, int iC, int del) {
@@ -1353,8 +1283,9 @@ public class Methods {
     }
 
     /**
-     * Encuentra los atractores de la red recorriendo todos los
-     * estados dinamicos.
+     * Encuentra los atractores de la red recorriendo todos los estados
+     * dinamicos.
+     *
      * @param r La red a la que le va a encontrar los atractores
      */
     public static int findAttAllSwitch(Red r, int renglon, int ChangedNode) {
@@ -1441,8 +1372,6 @@ public class Methods {
             return longTrans;
         }
 
-
-
         //5 DE aBRIL
         //ESTAS LINEAS LAS QUITE
 //        Attractor atr = null;
@@ -1493,14 +1422,13 @@ public class Methods {
 //
 //
 //        }
-
         return longTrans;
     }
 
     /**
-     * Encuentra el tiempo que tarda en aparecer el primer
-     * calcio rojo en la red solamente sampleando los estados
-     * dinamicos.
+     * Encuentra el tiempo que tarda en aparecer el primer calcio rojo en la red
+     * solamente sampleando los estados dinamicos.
+     *
      * @param r La red
      * @param iC número de condiciones iniciales
      */
@@ -1545,10 +1473,10 @@ public class Methods {
     }
 
     /**
-     * Encuentra el tiempo que tarda en aparecer el primer
-     * calcio rojo, lo guarda en un arreglote y hace un histograma
-     * de frecuencias para ver en que tiempo es mas probable
-     * llegar al primer calcio rojo
+     * Encuentra el tiempo que tarda en aparecer el primer calcio rojo, lo
+     * guarda en un arreglote y hace un histograma de frecuencias para ver en
+     * que tiempo es mas probable llegar al primer calcio rojo
+     *
      * @param r La red a la que le va a encontrar los atractores
      */
     public static int findCalcioRojoUnderHistogram(Red r, int iC) { //nombre y parametros
@@ -1565,9 +1493,6 @@ public class Methods {
 //        FileToWrite f = new FileToWrite("TimeToCaRedNoHVA.dat");
 
 //        r.getNodo(14).setPresente(false);
-
-
-
 //        fw.writeLine("t\t\t" + "p(t)");
         int[] p = new int[1000];
         for (int k = 0; k < 1000; k++) {
@@ -1575,7 +1500,6 @@ public class Methods {
         }
 
 //        for (int l = 0; l < 10; ++l) {
-
         int PromCaRojo = 0;
         int cuenta = 0;
         for (int ic = 0; ic < iC; ++ic) {     //iC asignada = 10,000   Para visualizar la cuenta
@@ -1615,9 +1539,10 @@ public class Methods {
     }
 
     /**
-     * Da el tiempo que tarda en aparecer por primera vez
-     * los calcios rojos de la red, solamente sampleando los estados
-     * dinamicos quitándole uno o más nodos
+     * Da el tiempo que tarda en aparecer por primera vez los calcios rojos de
+     * la red, solamente sampleando los estados dinamicos quitándole uno o más
+     * nodos
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @iC el numero de condiciones iniciales que muestrea
      */
@@ -1672,6 +1597,7 @@ public class Methods {
     /**
      * Encuentra los atractores de la red solamente sampleando los estados
      * dinamicos. Por eso se llama "Under" porque "Undersamplea".
+     *
      * @param r La red a la que le va a encontrar los atractores
      */
     public static int findCalcioRojoUnderSinHVAHistogram(Red r, int iC) { //nombre y parametros
@@ -1686,9 +1612,6 @@ public class Methods {
         FileToWrite fw;
         File = "TimeToReachCaHistHVA" + ".dat";
         fw = new FileToWrite(File);
-
-
-
 
         fw.writeLine("t\t\t" + "p(t)");
         int[] p = new int[1000];
@@ -1724,7 +1647,6 @@ public class Methods {
             PromDouble = (PromCaRojo / 10000.0);
 
 //        fw.writeLine(PromDouble +"");
-
             System.out.println("El promedio de tiempo pa llegar al Calcio rojo\n"
                     + "con todos los nodos presentes es: " + (PromDouble) + "\n"
                     + " y la suma de los calcios rojos iniciales es: " + PromCaRojo);
@@ -1734,9 +1656,10 @@ public class Methods {
     }
 
     /**
-     * Da el tiempo que tarda en aparecer por primera vez
-     * los calcios rojos de la red, solamente sampleando los estados
-     * dinamicos. Por eso se llama "Under" porque "Undersamplea".
+     * Da el tiempo que tarda en aparecer por primera vez los calcios rojos de
+     * la red, solamente sampleando los estados dinamicos. Por eso se llama
+     * "Under" porque "Undersamplea".
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @iC el numero de condiciones iniciales que muestrea
      */
@@ -1798,6 +1721,7 @@ public class Methods {
     /**
      * Encuentra el tiempo que tarda en llegar al atractor con todos los nodos
      * presentes undersampleando.
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @param iC el número de condiciones iniciales que muestrea
      */
@@ -1830,7 +1754,7 @@ public class Methods {
                     for (int i = t + 1; i < tMax; i++) {
                         if (arrayEquals(trj[t], trj[i])) {
                             System.out.println(i);
-                            
+
                             sumota += i;
                             break stop;
                         }
@@ -1844,8 +1768,9 @@ public class Methods {
     }
 
     /**
-     * Encuentra la iteración en la que se llega al atractor
-     * SWICHANDO LA FUNCION
+     * Encuentra la iteración en la que se llega al atractor SWICHANDO LA
+     * FUNCION
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @param iC el número de condiciones iniciales que muestrea.
      */
@@ -1899,9 +1824,9 @@ public class Methods {
     }
 
     /**
-     * Guarda en un archivo TODOS los arreglos que te
-     * llevan a un atractor de periodo 8, recorriendo todos los
-     * estados dinamicos.
+     * Guarda en un archivo TODOS los arreglos que te llevan a un atractor de
+     * periodo 8, recorriendo todos los estados dinamicos.
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @return longTrans, nomás pa ver si hay transitorios largos
      */
@@ -2009,9 +1934,9 @@ public class Methods {
     }
 
     /**
-     * Guarda en un archivo TODOS los arreglos que te
-     * llevan a un atractor de periodo 8, recorriendo todos los
-     * estados dinamicos.
+     * Guarda en un archivo TODOS los arreglos que te llevan a un atractor de
+     * periodo 8, recorriendo todos los estados dinamicos.
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @return longTrans, nomás pa ver si hay transitorios largos
      */
@@ -2097,9 +2022,9 @@ public class Methods {
     }
 
     /**
-     * Encuentra Todas las condiciones iniciales
-     * que te llevan a un atractor de periodo 8 recorriendo todos los
-     * estados dinamicos.
+     * Encuentra Todas las condiciones iniciales que te llevan a un atractor de
+     * periodo 8 recorriendo todos los estados dinamicos.
+     *
      * @param r La red a la que le va a encontrar los atractores
      */
     public static int findAllArraysToPeriod8(Red r) {
@@ -2186,8 +2111,6 @@ public class Methods {
                     }
                 }
 
-
-
                 t = tMax - 2;
                 busca = true;
                 l = 0;
@@ -2231,8 +2154,9 @@ public class Methods {
     }
 
     /**
-     * Encuentra la iteración en la que se llega al atractor
-     * undersampleando, sin los nodos NFA sensibles
+     * Encuentra la iteración en la que se llega al atractor undersampleando,
+     * sin los nodos NFA sensibles
+     *
      * @param r La red a la que le va a encontrar los atractores
      * @param iC el número de condiciones iniciales que muestrea.
      */
@@ -2285,11 +2209,11 @@ public class Methods {
     }
 
     /**
-     * Genera un patrón temporal de la evolución del calcio
-     * mediante un promedio de muchas configuraciones iniciales,
-     * y corriendo 10 pasos de tiempo la ventana para suavizar
-     * la señal. Con todos los nodos presentes, quitando 1 nodo y
-     * quitando 2 nodos.
+     * Genera un patrón temporal de la evolución del calcio mediante un promedio
+     * de muchas configuraciones iniciales, y corriendo 10 pasos de tiempo la
+     * ventana para suavizar la señal. Con todos los nodos presentes, quitando 1
+     * nodo y quitando 2 nodos.
+     *
      * @param r1 La red que se va a evolucionar
      * @param iC las condiciones iniciales a promediar
      * @return P el arreglo de la evolucion
@@ -2326,20 +2250,20 @@ public class Methods {
 //                cals[t][r] = r1.getNodo(r1.getSize()-1).getS();
 //                r1.getNodo(10).setPresente(false);
 //        r1.getNodo(14).setPresente(false);
-               
+
 //                if(Math.random() > (Math.exp(speract/(t+1)))){
 //                r1.getNodo(0).setS(0);
 //                }
 //                else{r1.getNodo(0).setS(1);}
-                
 //                if(t%4 != 0){
 //                r1.getNodo(17).setS(1);
 //                r1.getNodo(20).setS(1);
 //                }
 //                r1.evolveKauffman();
-                trjs[r][t] += r1.getNodo(r1.getSize()-1).getS();
-                r1.evolveKauffman(); r1.getNodo(20).setS(1);
-                cals[t][r] = r1.getNodo(r1.getSize()-1).getS();
+                trjs[r][t] += r1.getNodo(r1.getSize() - 1).getS();
+                r1.evolveKauffman();
+                r1.getNodo(20).setS(1);
+                cals[t][r] = r1.getNodo(r1.getSize() - 1).getS();
             }
         }
         // </editor-fold>
@@ -2357,7 +2281,7 @@ public class Methods {
         for (int i = 800; i < 1000; ++i) {
             Q[i - 800][0] = P[i];
         }
-        System.out.println( "acabe de escribir archivo del nfa " + r1.getNodo(17).getName());
+        System.out.println("acabe de escribir archivo del nfa " + r1.getNodo(17).getName());
         /*
          * Hasta aqui fue solo para el calcio en wt.
          * En adelante se quitan los nodos
@@ -2415,18 +2339,16 @@ public class Methods {
 //                Q[i - 800][delete + 1] = P[i];
 //            }
 //        }
-
-
         System.out.println("termina el metodo calciumEvolution     " + speract);
         return Q;
     }
 
     /**
-     * Genera un patrón temporal de la evolución del calcio
-     * mediante un promedio de muchas configuraciones iniciales,
-     * y corriendo 10 pasos de tiempo la ventana para suavizar
-     * la señal. Con todos los nodos presentes, quitando 1 nodo y
-     * quitando 2 nodos.
+     * Genera un patrón temporal de la evolución del calcio mediante un promedio
+     * de muchas configuraciones iniciales, y corriendo 10 pasos de tiempo la
+     * ventana para suavizar la señal. Con todos los nodos presentes, quitando 1
+     * nodo y quitando 2 nodos.
+     *
      * @param r1 La red que se va a evolucionar
      * @param iC las condiciones iniciales a promediar
      */
@@ -2507,15 +2429,15 @@ public class Methods {
     }
 
     /**
-     * Evoluciona la dinÃ¡mica de Kauffman con 3 redes.
-     * Antes de generar el vector de estados dinÃ¡micos discretos
-     * las variables acoplantes (Calcio) se guardarÃ¡n en un vector
-     * temporal de tamaÃ±o 3, donde se harÃ¡ una especie de promedio, donde el nodo del centro
-     * va a "hacer caso" a sus vecinos con cierta probabilidad, dependiendo de la
-     * "distancia" que estÃ¡ un cluster de otro.
-     * Purpuratus va a estar mÃ¡s lejos que pictus.
-     * Esto serÃ¡ determinado por el epsilon.
-     * IMPORTANTE: EPSILON >= 3 GENERA TRANSITORIOS MAYORES A 55 PASOS
+     * Evoluciona la dinÃ¡mica de Kauffman con 3 redes. Antes de generar el
+     * vector de estados dinÃ¡micos discretos las variables acoplantes (Calcio)
+     * se guardarÃ¡n en un vector temporal de tamaÃ±o 3, donde se harÃ¡ una
+     * especie de promedio, donde el nodo del centro va a "hacer caso" a sus
+     * vecinos con cierta probabilidad, dependiendo de la "distancia" que estÃ¡
+     * un cluster de otro. Purpuratus va a estar mÃ¡s lejos que pictus. Esto
+     * serÃ¡ determinado por el epsilon. IMPORTANTE: EPSILON >= 3 GENERA
+     * TRANSITORIOS MAYORES A 55 PASOS
+     *
      * @param n1 nodo 1 que harÃ¡ la dinÃ¡mica por la izquierda
      * @param n2 nodo 2, Ã©ste es el principal
      * @param n3 nodo 3, el de la derecha.
@@ -2633,7 +2555,6 @@ public class Methods {
          * a decir que sea .3 y .6 las cotas superior e inferior
          */
 //        double Redondeador;
-
         double noRoundTemp = (sumaTemp * epsilon) + (tempNode[1] * (1 - epsilon));
 
 //        if (n2[NodoAcoplador].isBinary() == false) {
@@ -2652,7 +2573,6 @@ public class Methods {
 //                tempcGMP[1] = 1;
 //            }
 //        }
-
         double noRoundCa = (sumaTempCa * epsilon) + (tempCa[1] * (1 - epsilon));
         if (noRoundCa <= Rounder2) {
             tempCa[1] = 0;
@@ -2662,7 +2582,6 @@ public class Methods {
             tempCa[1] = 2;
         }
 
-
         double noRoundcAMP = (sumaTempcAMP * epsilon) + (tempcAMP[1] * (1 - epsilon));
 //        if (noRoundcAMP <= Rounder) {
 //            tempCa[1] = 0;
@@ -2671,7 +2590,6 @@ public class Methods {
 //        } else {
 //            tempCa[1] = 2;
 //        }
-
 
         double noRoundcGMP = (sumaTempcGMP * epsilon) + (tempcGMP[1] * (1 - epsilon));
 //        if (noRoundcGMP <= Rounder) {
@@ -2710,16 +2628,11 @@ public class Methods {
          * "divisor", voy a usar (1+epsilon), ya que cuando epsilon tiende a 0, regresamos
          * a la dinámica desacoplada.
          */
-
 //        tempCa[1] = (int) Math.round((sumaTemp * epsilon) + (tempCa[1] / divisor));
 //        tempCa[1] = (int) Math.round((sumaTemp * epsilon) + (tempCa[1] / (1 + epsilon)));
 //   tempCa[1] = (int) Math.round((sumaTemp * epsilon) + (tempCa[1] * (1 - epsilon)));   //Difusivo
 //        tempCa[1] = (int) ((int) Math.round(epsilon * tempCa[0]) + ((1 - epsilon) * tempCa[2]) + (divisor * tempCa[1]));//Jor
 //        tempCa[1] = (int) Math.round((tempCa[1] * divisor) + CalcioPos_m1 - CalcioPos_M1);   //El buenisimo 24 de agosto
-
-
-
-
         if (tempCa[1] > 2) {
             tempCa[1] = 2;
         }
@@ -2752,9 +2665,9 @@ public class Methods {
     }
 
     /**
-     * Este es igual al de evolveCoupled pero solo con
-     * 2 nodos, el de la cola y el de junto.
-     * En este mÃ©todo se hace lo mismo que arriba pero con 2
+     * Este es igual al de evolveCoupled pero solo con 2 nodos, el de la cola y
+     * el de junto. En este mÃ©todo se hace lo mismo que arriba pero con 2
+     *
      * @param n1 nodo de la cola
      * @param n2 nodo de junto
      * @param epsilon, el tÃ©rmino que disminuye el coupling.
@@ -2805,9 +2718,7 @@ public class Methods {
          * en la que se encuentren y con eso voy a crear una exponencial
          * negativa para ver cómo se comporta así el acoplamiento
          */
-
         double CalcioPos_m1 = Math.round(tempCa[0] * Math.exp(-epsilon * (posicion - 1)));
-
 
         double sumaTemp = epsilon * tempCa[1];
 
@@ -2819,7 +2730,6 @@ public class Methods {
         tempCa[0] = (int) Math.round((sumaTemp * epsilon) + (tempCa[0] * (1 - epsilon)));      //Difusivo
 //        tempCa[1] = (int) ((int) Math.round ((1 - epsilon) * tempCa[0]) + (divisor * tempCa[1])); //de Jorge
 //        tempCa[1] = (int) Math.round(CalcioPos_m1 - tempCa[1] / divisor);   //El buenisimo 24 de agosto
-
 
         if (tempCa[1] > 2) {
             tempCa[1] = 2;
@@ -2850,9 +2760,9 @@ public class Methods {
     }
 
     /**
-     * Este es igual al de evolveCoupled pero solo con
-     * 2 nodos, el de la cola y el de junto.
-     * En este mÃ©todo se hace lo mismo que arriba pero con 2
+     * Este es igual al de evolveCoupled pero solo con 2 nodos, el de la cola y
+     * el de junto. En este mÃ©todo se hace lo mismo que arriba pero con 2
+     *
      * @param n1 nodo de la cola
      * @param n2 nodo de junto
      * @param epsilon, el tÃ©rmino que disminuye el coupling.
@@ -2903,12 +2813,9 @@ public class Methods {
          * en la que se encuentren y con eso voy a crear una exponencial
          * negativa para ver cómo se comporta así el acoplamiento
          */
-
-
         double CalcioPos_M1 = tempCa[1] * Math.exp(-epsilon * (posicion + 1));
 
 //        System.out.println("exponente es " + CalcioPos_M1 );
-
         double sumaTemp = epsilon * tempCa[1];
 
         /*
@@ -2919,7 +2826,6 @@ public class Methods {
 //         tempCa[1] = (int) Math.round((sumaTemp * epsilon) + (tempCa[0] * (1 - epsilon)));      //Difusivo
 //        tempCa[1] = (int) ((int) Math.round ((1 - epsilon) * tempCa[0]) + (divisor * tempCa[1])); //de Jorge
         tempCa[1] = (int) Math.round((tempCa[0] * divisor) - CalcioPos_M1);   //El buenisimo 24 de agosto
-
 
         if (tempCa[1] > 2) {
             tempCa[1] = 2;
@@ -2949,12 +2855,11 @@ public class Methods {
     }
 
     /**
-     * Método para acoplar redes, obtener los atractores
-     * y curvas características, así como transitorios
-     * pero SOLAMENTE EL NODO CORRESPONDIENTE AL CALCIO
-     * porque si no va a ser un monton de números que
-     * nomás estorban
-     * Los 10 primeros parámteros son las redes a evolucionar
+     * Método para acoplar redes, obtener los atractores y curvas
+     * características, así como transitorios pero SOLAMENTE EL NODO
+     * CORRESPONDIENTE AL CALCIO porque si no va a ser un monton de números que
+     * nomás estorban Los 10 primeros parámteros son las redes a evolucionar
+     *
      * @param r
      * @param r2
      * @param r3
@@ -2965,13 +2870,15 @@ public class Methods {
      * @param r8
      * @param r9
      * @param r10
-     * @param iC    El nÃºmero mÃ¡ximo de condiciones iniciales (< 100 000 )
-     * @param eps   El epsilon que multiplica el tÃ©rmino de acoplamiento
-     * @param div  Mi sigma o el término de perdida de calcio en el flagelo
-     * @return      longTrans pa ver cuanto tarda en llegar al atractor o transitorio promedio
+     * @param iC El nÃºmero mÃ¡ximo de condiciones iniciales (< 100 000 )
+     * @pa
+     * ram eps El epsilon que multiplica el tÃ©rmino de acoplamiento
+     * @param div Mi sigma o el término de perdida de calcio en el flagelo
+     * @return longTrans pa ver cuanto tarda en llegar al atractor o transitorio
+     * promedio
      *
-     * NOTA NO MENTAL: TODO LO HECHO EN ESTE ARCHIVO, PARTICULARMENTE EN ESTE METODO
-     * SE HIZO EN FLORENCIA, RECORDARLO POR SI HAY ERRORES
+     * NOTA NO MENTAL: TODO LO HECHO EN ESTE ARCHIVO, PARTICULARMENTE EN ESTE
+     * METODO SE HIZO EN FLORENCIA, RECORDARLO POR SI HAY ERRORES
      */
     public static double[] todoCoupled(Red r, Red r2, Red r3, Red r4, Red r5,
             Red r6,
@@ -3028,11 +2935,9 @@ public class Methods {
 //
 //        FileToWrite fw2 = new FileToWrite("ItalianCoupling/NumRedesVSTransitorio/PruebaCouplingIsOK/10Redes_TransFlagelo_" + epsilon
 //                + "_.dat");
-
         FileToWrite fw3 = new FileToWrite("ItalianCoupling/GoodCoupling/10redesCalcio_Eps_" + epsilon + "_.dat");
 //         FileToWrite fw4 = new FileToWrite("ItalianCoupling/CalcioEnCola/Derivada_" + epsilon + "_.dat");
 //        FileToWrite fileCa = new FileToWrite("Enero12/Red5_ArrayCa_" + eps +"_div_"+ div + "_.txt");
-
 
         for (int ic = 0; ic < iC; ++ic) {
 //            FileToWrite fw3 = new FileToWrite("/home/chucho/Coupled//ic_" + iC + "periodo_eps_" + epsilon + "_div" + div + ".dat");
@@ -3062,7 +2967,7 @@ public class Methods {
              * CON ESTE ARREGLO, NO CON FLAGELO, PARA VER SI SE PUEDE HACER
              * EL MUESTREO CON MAS COND. INICIALES
              * A VER QUE PASA
-            /
+             /
              * 
              */
             r.setRandomStates();
@@ -3154,7 +3059,6 @@ public class Methods {
                 /*
                  * Aqui acaba el rollo del voltaje isopotencial
                  */
-
                 trj[t] = r.getStates();
                 trj2[t] = r2.getStates();
                 trj3[t] = r3.getStates();
@@ -3181,18 +3085,14 @@ public class Methods {
                  * 29 octubre 2012
                  * Quiero ver el calcio como si fuera el flagelo
                  */
-
 //                for(int fl = 0; fl < 10; ++fl){
 //                    System.out.print(calcio[t][fl] + " ");
 //                }
 //                System.out.println();
-
-
                 /*
                  * 7 de noviembre de 2012
                  * Voy a sumar los calcios y graficarlos
                  */
-
                 for (int i = 0; i < 10; i++) {
                     calciote[t] += calcio[t][i];
                 }
@@ -3264,13 +3164,13 @@ public class Methods {
     }
 
     /**
-     * Método para acoplar redes, obtener los atractores
-     * y curvas características, así como transitorios
-     * pero SOLAMENTE EL NODO CORRESPONDIENTE AL CALCIO
-     * porque si no va a ser un monton de números que
-     * nomás estorban, vamos a hacerla con distribucion exponencial
-     * de los canales de calcio y el KCNG, xq los demas son del feedback
-     * Los 10 primeros parámteros son las redes a evolucionar
+     * Método para acoplar redes, obtener los atractores y curvas
+     * características, así como transitorios pero SOLAMENTE EL NODO
+     * CORRESPONDIENTE AL CALCIO porque si no va a ser un monton de números que
+     * nomás estorban, vamos a hacerla con distribucion exponencial de los
+     * canales de calcio y el KCNG, xq los demas son del feedback Los 10
+     * primeros parámteros son las redes a evolucionar
+     *
      * @param r
      * @param r2
      * @param r3
@@ -3281,10 +3181,12 @@ public class Methods {
      * @param r8
      * @param r9
      * @param r10
-     * @param iC    El nÃºmero mÃ¡ximo de condiciones iniciales (< 100 000 )
-     * @param eps   El epsilon que multiplica el tÃ©rmino de acoplamiento
-     * @param div  Mi sigma o el término de perdida de calcio en el flagelo
-     * @return      longTrans pa ver cuanto tarda en llegar al atractor o transitorio promedio
+     * @param iC El nÃºmero mÃ¡ximo de condiciones iniciales (< 100 000 )
+     * @pa
+     * ram eps El epsilon que multiplica el tÃ©rmino de acoplamiento
+     * @param div Mi sigma o el término de perdida de calcio en el flagelo
+     * @return longTrans pa ver cuanto tarda en llegar al atractor o transitorio
+     * promedio
      */
     public static int todoCoupledExp(Red r, Red r2, Red r3, Red r4,
             Red r5, Red r6, Red r7, Red r8, Red r9, Red r10, int iC, double eps, double div, int nodoAcoplador) {
@@ -3327,8 +3229,6 @@ public class Methods {
         calcioProm = new int[tMax][10];
         int l = 0;
         int k, t;
-
-
 
         for (int ic = 0; ic < iC; ++ic) {
             /*
@@ -3488,7 +3388,6 @@ public class Methods {
             for (int j = (9 * N); j < 10 * N; ++j) {
                 flagelo[0][j] = trj10[0][j - ((9 * N))];
             }
-
 
             for (int cal = 0; cal < 10; cal++) {
                 calcio[0][cal] = flagelo[0][(cal + 1) * (N - 1)];
@@ -3676,8 +3575,9 @@ public class Methods {
     }
 
     /**
-     * Encuentra las ciudades que están a un radio menor
-     * que el determinado por el usuario
+     * Encuentra las ciudades que están a un radio menor que el determinado por
+     * el usuario
+     *
      * @param d distancia entre puntos
      */
     public static void radioMenor(String estado, String mpio, String edoTarget, String mpioTarget, double d, double radio, FileToWrite fwr, int muertos) {
@@ -3689,16 +3589,12 @@ public class Methods {
             fwr.writeLine(edoTarget + "\t" + mpioTarget + "\t" + RadioMenor1 + "\t" + muertos);
         }
 
-
-
 //        return RadioMenor;
-
     }
 
     /**
-     * Lee los archivos de las coordenadas ".dat" pero feos
-     * y a partir de ellos crea unos ".dat"
-     * unicamente con dos columnas de la coordenada X y la Y
+     * Lee los archivos de las coordenadas ".dat" pero feos y a partir de ellos
+     * crea unos ".dat" unicamente con dos columnas de la coordenada X y la Y
      */
     public static void creaDatsCoordsGMaps() {
         String file = ("Hernan/dats/opio/Gro.dat");
@@ -3780,14 +3676,13 @@ public class Methods {
     }
 
     /**
-     * Genera un patrón temporal de la evolución del calcio
-     * mediante un promedio de muchas configuraciones iniciales,
-     * y corriendo 10 pasos de tiempo la ventana para suavizar
-     * la señal. Con todos los nodos presentes, quitando 1 nodo y
-     * quitando 2 nodos.
-     * La parte nueva es que ahora catsper se activa independientemente, simulando
-     * el efecto del NFA al sobreactivarlo.
-     * Se activa dependiendo del módulo del entero pasoAct
+     * Genera un patrón temporal de la evolución del calcio mediante un promedio
+     * de muchas configuraciones iniciales, y corriendo 10 pasos de tiempo la
+     * ventana para suavizar la señal. Con todos los nodos presentes, quitando 1
+     * nodo y quitando 2 nodos. La parte nueva es que ahora catsper se activa
+     * independientemente, simulando el efecto del NFA al sobreactivarlo. Se
+     * activa dependiendo del módulo del entero pasoAct
+     *
      * @param r1 La red que se va a evolucionar
      * @param iC las condiciones iniciales a promediar
      * @param file es el nombre del archivo que guarda la dinamica de calcio
@@ -3827,16 +3722,15 @@ public class Methods {
     }
 
     /**
-     * Crea archivos con el tiempo transitorio y
-     * con la configuración con la que llegan al atractor:
-     *      Tenemos el atractor 0 2 1 1
-     *      pero se puede llegar a él de 4 formas distintas: 02, 21, 11 y 10
-     * Este metodo calcula el tiempo transitorio y en cuál de esas 4 configuraciones inicia
-     * el atractor.
+     * Crea archivos con el tiempo transitorio y con la configuración con la que
+     * llegan al atractor: Tenemos el atractor 0 2 1 1 pero se puede llegar a él
+     * de 4 formas distintas: 02, 21, 11 y 10 Este metodo calcula el tiempo
+     * transitorio y en cuál de esas 4 configuraciones inicia el atractor.
      *
-     * Posteriormente se hará un hstograma de frecuencias para versi está cargado
-     * haacia uno de estas configuraciones, para poder explicar por qué el calcio
-     * no se mantiene totalmente en 1, sino entre 0.85 y 1.15
+     * Posteriormente se hará un hstograma de frecuencias para versi está
+     * cargado haacia uno de estas configuraciones, para poder explicar por qué
+     * el calcio no se mantiene totalmente en 1, sino entre 0.85 y 1.15
+     *
      * @param r la red que se usa
      * @param iC el número de condiciones iniciales
      */
@@ -3979,14 +3873,13 @@ public class Methods {
     }
 
     /**
-     * Genera un patrón temporal de la evolución del calcio
-     * mediante un promedio de muchas configuraciones iniciales,
-     * y corriendo 10 pasos de tiempo la ventana para suavizar
-     * la señal. Con todos los nodos presentes, quitando 1 nodo y
-     * quitando 2 nodos.
-     * La parte nueva es que ahora catsper se activa independientemente, simulando
-     * el efecto del NFA al sobreactivarlo.
-     * Se activa dependiendo del módulo del entero pasoAct
+     * Genera un patrón temporal de la evolución del calcio mediante un promedio
+     * de muchas configuraciones iniciales, y corriendo 10 pasos de tiempo la
+     * ventana para suavizar la señal. Con todos los nodos presentes, quitando 1
+     * nodo y quitando 2 nodos. La parte nueva es que ahora catsper se activa
+     * independientemente, simulando el efecto del NFA al sobreactivarlo. Se
+     * activa dependiendo del módulo del entero pasoAct
+     *
      * @param r1 La red que se va a evolucionar
      * @param iC las condiciones iniciales a promediar
      * @param pasoAct Entero que indica cada cuántos pasos se activa catsper
@@ -4020,7 +3913,6 @@ public class Methods {
 //            s = (Math.random() < 0.5) ? 1 : 0;
 //            r1.getNodo(21).setS(s);
 
-
             for (int t = 0; t < T; ++t) {
                 trjs[r][t] += r1.getNodo(21).getS();
 
@@ -4039,7 +3931,6 @@ public class Methods {
                     int ti = (Math.random() < (pasoAct / 10.0)) ? r1.getNodo(20).getS() : 1;
                     r1.getNodo(20).setS(ti);
                 }
-
 
                 cals[t][r] = r1.getNodo(21).getS();
                 System.out.print(" " + cals[t][r]);
@@ -4072,7 +3963,6 @@ public class Methods {
 //            file = "Curvas/curvaSin_" + r1.getNodo(n).getName() + ".dat";
 
         //       file = "CurvasTodosWT/" + r1.getNodo(cur).getName() + ".dat";
-
         file = "catsper/26JulPruebas/ActivaCatsper/catsperActivo90_"
                 //                + pasoAct
                 //                //        file = "CurvasNoAtenuadas/wt3_ValeLVA"
@@ -4093,12 +3983,12 @@ public class Methods {
     }
 
     /**
-     * Este metodo calcula la mayoría de parametros que se buscan
-     * del modelo del erizo. Se calcula de una sola vez todo lo que
-     * se puede:
-     * Media,pico, amplitud y frecuencia de la dinamica del calcio.
-     * También calcula los valores del análisis de atractores.
-     * Todo lo imprime en pantalla pero puede imprimir en archivo
+     * Este metodo calcula la mayoría de parametros que se buscan del modelo del
+     * erizo. Se calcula de una sola vez todo lo que se puede: Media,pico,
+     * amplitud y frecuencia de la dinamica del calcio. También calcula los
+     * valores del análisis de atractores. Todo lo imprime en pantalla pero
+     * puede imprimir en archivo
+     *
      * @param r1 La red
      * @param iC Número de condiciones iniciales
      * @param nod8 Valor que indica si HCN estará o no presente (1 = presente)
@@ -4108,7 +3998,8 @@ public class Methods {
      * @param CaKCact Valor que indica si se sobreactiva o no CaKC
      * @param pasoAct Valordel porcentaje de sobreactivacion
      * @param es Booleano que indica si se sobreexpresa al 100% o no algun nodo.
-     *           Si no se sobreexpresa, con una probabilidad expresa su valor de la tabla (false = 100%)
+     * Si no se sobreexpresa, con una probabilidad expresa su valor de la tabla
+     * (false = 100%)
      * @return
      */
     public static int TodoDeTodo(Red r1, int iC, int nod8, int nod16, int nod20, int catsperAct, int CaKCact, int pasoAct, boolean es) {
@@ -4136,9 +4027,6 @@ public class Methods {
             r1.getNodo(20).setPresente(false);
 //            System.out.println(r1.getNodo(20).getName() + " ");
         }
-
-
-
 
         int[][] trjs = new int[iC][T];
         int[][] trjRed = new int[T][r1.getSize()];
@@ -4223,8 +4111,6 @@ public class Methods {
 
         }
 
-
-
         /*
          * Ahora obtenemos los valores de:
          * media, pico, amplitud y frecuencia
@@ -4260,16 +4146,12 @@ public class Methods {
         for (int i = 1199; i > 500; --i) {
             for (int j = i - 1; j > 500; --j) {
 
-
-
                 /*
                  * para el pico máximo y la amplitud
                  */
                 if (P[i] == P[j]) {
                     double[] sorted = new double[i - j + 1];
                     double[] amps = new double[i - j + 1];
-
-
 
                     for (int m = 0; m < sorted.length; ++m) {
                         amps[m] = Math.abs(P[i - m] - P[i - m - 1]);
@@ -4356,8 +4238,10 @@ public class Methods {
     }
 
     /**
-     * De algún modo mágico hace la correlación de pearson o sperman
-     * con la librería jsc.*
+     * De algún modo mágico hace la correlación de pearson o sperman con la
+     * librería jsc.
+     *
+     *
      * @param x Arreglo con la dinamica de calcio
      * @param y Otro arreglo de la dinamica
      * @return El indice de correlacion o R
@@ -4367,37 +4251,35 @@ public class Methods {
 //        FileToWrite fw = new FileToWrite("catsper/CatsperFullChannels/CorrelacionesMatriz3D.dat");
         FileToWrite fw = new FileToWrite("catsper/Gordon/TCatsperAD/CorrelacionesMatriz.dat");
 //        SteadyStates = calciumEvolution(r, iC);
-        double[][] st =  new double[r.getSize()+1][200];
-        FileToRead fr0 =  new FileToRead("catsper/Gordon/TCatsperAD/curvas/wt.dat");
-        for(int n = 0; n < 800; ++n){
+        double[][] st = new double[r.getSize() + 1][200];
+        FileToRead fr0 = new FileToRead("catsper/Gordon/TCatsperAD/curvas/wt.dat");
+        for (int n = 0; n < 800; ++n) {
             fr0.nextLine();
         }
-        for(int m = 0; m < 200; ++m){
-                fr0.nextInt();
-                    st[0][m] = fr0.nextDouble();
+        for (int m = 0; m < 200; ++m) {
+            fr0.nextInt();
+            st[0][m] = fr0.nextDouble();
         }
-            
-            fr0.close();
-        
-            for(int n = 1; n <=r.getSize(); ++n){
-                
-                
-            FileToRead fr =  new FileToRead("catsper/Gordon/TCatsperAD/curvas/sin" + r.getNodo(n-1).getName() + ".dat");
-            System.out.println("nodo "+ (n) + " es "  + r.getNodo(n-1).getName());
-            
-            for(int nn = 0; nn < 800; ++nn){
-            fr.nextLine();
-        }
-            for(int m = 0; m < 200; ++m){
-            
-            
-            fr.nextInt();
-            st[n][m] = fr.nextDouble(); 
-        }
-            
+
+        fr0.close();
+
+        for (int n = 1; n <= r.getSize(); ++n) {
+
+            FileToRead fr = new FileToRead("catsper/Gordon/TCatsperAD/curvas/sin" + r.getNodo(n - 1).getName() + ".dat");
+            System.out.println("nodo " + (n) + " es " + r.getNodo(n - 1).getName());
+
+            for (int nn = 0; nn < 800; ++nn) {
+                fr.nextLine();
+            }
+            for (int m = 0; m < 200; ++m) {
+
+                fr.nextInt();
+                st[n][m] = fr.nextDouble();
+            }
+
             fr.close();
         }
-            DecimalFormat df = new DecimalFormat("0.000000000000000");
+        DecimalFormat df = new DecimalFormat("0.000000000000000");
         double[] x = new double[200];
         double[] y = new double[200];
         for (int n = 0; n < r.getSize() + 1; ++n) {
@@ -4408,13 +4290,10 @@ public class Methods {
                 y = st[m];
                 PairedData xy = new PairedData(x, y);
                 PearsonCorrelation sd = new PearsonCorrelation(xy);
-               
 
-                    fw.writeLine(n + "\t" + m + "\t" + df.format(sd.getR()) );
-                
+                fw.writeLine(n + "\t" + m + "\t" + df.format(sd.getR()));
+
 //                System.out.println("correlacion entre " + n + " y " + m + " es: " + sd.getR());
-           
-            
             }
 //            fw.writeLine();
         }
@@ -4473,8 +4352,6 @@ public class Methods {
 //            }
 //        }
 //        fw.close();
-
-
         /*
          * Pal Switch
          */
@@ -4495,7 +4372,6 @@ public class Methods {
 ////                         red.saveAttractors("Atractores22Sep11/at/"
 ////                        + n +"/"
 ////                        + "_" + CompRenglon + ".txt", l);
-
 
                 r1.saveAttractorsLandscape("/home/chucho/Desktop/ModeloCatsper/Atractores/Switch/at/"
                         + n + "/"
@@ -4551,26 +4427,6 @@ public class Methods {
             Red r8,
             Red r9,
             Red r10,
-            //            Red r11, 
-            //            Red r12, 
-            //            Red r13, 
-            //            Red r14, 
-            //            Red r15, 
-            //            Red r16,
-            //            Red r17, 
-            //            Red r18, 
-            //            Red r19, 
-            //            Red r20,
-            //             Red r21, 
-            //            Red r22, 
-            //            Red r23, 
-            //            Red r24, 
-            //            Red r25, 
-            //            Red r26,
-            //            Red r27, 
-            //            Red r28, 
-            //            Red r29, 
-            //            Red r30,
             int iC, double eps, double div, double rounder2, double rounder, int nodoAcoplador) {
         int N = r.getSize();
         int tMax = 50;
@@ -4935,8 +4791,6 @@ public class Methods {
 //                    GranTrj[t][(29*N)+i]= trj20[t][i];
 //                }
 
-
-
                 calcio[t][0] = trj[t][N - 1];
                 calcio[t][1] = trj2[t][N - 1];
                 calcio[t][2] = trj3[t][N - 1];
@@ -5009,12 +4863,12 @@ public class Methods {
     }
 
     /**
-     * Da el valor del calcio acoplando "N" numero de redes
-     * decidiendo el valor del calcio por criterio de
-     * regla de la mayoria. Si más de la mitad de los
-     * nodos vecinos tienen el mismo valor, entonces el nodo
-     * central adquiere ese valor, o al menos se acerca en 
-     * una unidad, si es que estaba a 2 del valor de la mayoria.
+     * Da el valor del calcio acoplando "N" numero de redes decidiendo el valor
+     * del calcio por criterio de regla de la mayoria. Si más de la mitad de los
+     * nodos vecinos tienen el mismo valor, entonces el nodo central adquiere
+     * ese valor, o al menos se acerca en una unidad, si es que estaba a 2 del
+     * valor de la mayoria.
+     *
      * @param n1 nodo que lee sus reglas
      * @param n2 el nodo central
      * @param n3 nodo de la derecha
@@ -5039,8 +4893,6 @@ public class Methods {
             M = nodo.get(j).length;
         }
         int[][] nuevosEstados = new int[numNodos][M];
-
-
 
         //Creamos el vector donde se almacena temporalmente
         //y se juega con los valores del calcio
@@ -5238,7 +5090,6 @@ public class Methods {
                 /*
                  * Aqui acaba el rollo del voltaje isopotencial
                  */
-
                 trj[t] = r.getStates();
                 trj2[t] = r2.getStates();
                 trj3[t] = r3.getStates();
@@ -5304,387 +5155,16 @@ public class Methods {
         sumota[1] = sumota[1] / iC;
         return sumota;
     }
+    public static void derridaMapCoupled(Red r1, Red r2, Red r3, Red r4,
+            Red r5, Red r6, Red r7, Red r8,
+            Red r9, Red r10, Red r11, Red r12,
+            Red r13, Red r14, Red r15, Red r16,
+            Red r17, Red r18, Red r19, Red r20,
+            int iC, double eps, double div,
+            double rounder2, double rounder, int nodoAcoplador,
+            String file) {
 
-//    public static void evolveReglaMayoriaChida(int numNodos, Nodo[][] nodo) {
-//
-//        
-//        nodo = new Nodo[numNodos][];
-//        int N = nodo.length;                          //N tiene el tamaÃ±o de la red
-////        nodo = new ArrayList<Nodo[]>();
-//        int[][] nuevoEstado = new int[numNodos][N];
-//        int[] nrs = new int[numNodos];      //nrs: cada array de nodos tiene un numero de reguladores. nrs los guarda
-//        //antes, nr era un solo entero, nrs ora es arreglo
-//
-////        for (int n = 0; n < numNodos; ++n) {
-////            nodo.add(n,nodo.get(n));
-////        }
-//        /*
-//         * se supone que aqui ya tengo hechos
-//         * mis arreglos de nodos
-//         */
-//        numNodos = 3;
-//        int[] ifr = new int[numNodos];
-//        int[][] nt;     //nt es la matriz donde se guarda en cada fila
-//        // el numero de reguladores de cada nodo 
-//
-//
-//
-//        //Creamos el vector donde se almacena temporalmente
-//        //y se juega con los valores del calcio
-//        int[] tempCa = new int[numNodos];
-//        for (int ns = 0; ns < numNodos; ++ns) {          //for para cada nodo adicionado del ArrayList
-//            for (int n = 0; n < N; ++n) {               //for para cada nodo de la red
-//                nrs[ns] = nodo[n].getNumReg();
-//                nt = new int[numNodos][nrs[ns]]; //"nt"era el vector que guarda el num d regs. de N
-//                //ora es matriz, dependiendo del numNodos
-//
-//                /*
-//                 * Ora aqui obtenemos el estado
-//                 * de los reguladores de cada nodo
-//                 * dentro de cada array de nodos
-//                 */
-//                for (int m = 0; m < nrs[ns]; ++m) {
-//                    int i = nodo[n].getReg(m);
-//                    nt[ns][m] = nodo[i].getS();
-//                }
-//
-//                /*
-//                 * aqui se convierten a enteros los
-//                 * arreglos ternarios y se guarda el
-//                 * estado de cada nodo de la red, para cada
-//                 * array de nodos
-//                 */
-//                ifr[ns] = ternaryToInt(nt[ns]);
-//                nuevoEstado[ns][n] = nodo[n].getFuncVal(ifr[ns]);
-//
-//            }
-//        }
-//        /*
-//         * se supone que en este momento, ya estan
-//         * todos los arreglos de nodos de todos los
-//         * arrays de nodos creados. O sea, todo de todo.
-//         * A partir de aqui se juega con los valores del
-//         * calcio y se hace la regla de la mayoria
-//         */
-//        
-//
-//        int cuenta0 = 0;
-//        int cuenta1 = 0;
-//        int cuenta2 = 0;
-//        /*
-//         * empezamos por asignar a tempCa los valores
-//         * del calcio obtenidos de las tablas y
-//         * activamos los contadores pa la regla de la
-//         * mayoria
-//         */
-//        for (int a = 0; a < numNodos; ++a) {
-//            tempCa[a] = nuevoEstado[a][N - 1];
-//            if (tempCa[a] == 0) {
-//                cuenta0++;
-//            } else if (tempCa[a] == 1) {
-//                cuenta1++;
-//            } else {
-//                cuenta2++;
-//            }
-//        }
-//        
-//        /*
-//         * INICIA REGLA DE LA MAYORIA
-//         * ALGUNAS CONSIDERACIONES
-//         * el numero de redes siempre sera impar
-//         * para que el nodo del centro vea un numero
-//         * igual a la derecha y a la izquierda.
-//         * 
-//         * caso mayoria 0
-//         */
-//        if ((cuenta0 > (numNodos / 2)) && tempCa[(int)(numNodos / 2) + 1] != 2) {
-//            tempCa[(int)(numNodos / 2) + 1] = 0;
-//        } else if ((cuenta0 > (numNodos / 2)) && tempCa[(int)(numNodos / 2) + 1] == 2) {
-//            tempCa[(int)(numNodos / 2) + 1] = 0;
-//        }
-//
-//        /*
-//         * Caso mayoria 1
-//         */
-//        if (cuenta1 > (numNodos / 2)) {
-//            tempCa[(int)(numNodos / 2) + 1] = 1;
-//        } /*
-//         * caso mayoria 2
-//         */ else if ((cuenta2 > (numNodos / 2)) && tempCa[(int)(numNodos / 2) + 1] != 0) {
-//            tempCa[(int)(numNodos / 2) + 1] = 2;
-//        } else if ((cuenta2 > (numNodos / 2)) && tempCa[(int)(numNodos / 2) + 1] == 0) {
-//            tempCa[(int)(numNodos / 2) + 1] = 1;
-//        }
-//        /*
-//         * si no encuentra ninguna de estas reglas, se queda
-//         * con su valor
-//         */
-//        else {
-//            tempCa[(int)(numNodos / 2) + 1] = tempCa[(int)(numNodos / 2) + 1];
-//        }
-//        
-//        /*
-//         * ya esta parte es la verdadera asignacion de valores
-//         * De aqui sale el metodo con el valor del calcio "mayoreado"
-//         * de "ns" calcios. Ademas todos los nodos con sus valores respectivos
-//         */
-//        for(int ns = 0; ns < numNodos; ++ns){
-//        for (int n = 0; n < N; ++n) {
-//            if (nodo[ns].isPresent()) {
-//                nodo[ns].setS(nuevoEstado[(int)(numNodos / 2) + 1][n]);
-//            } else {
-//                if (nodo[ns].isBinary()) {
-//                    nodo[ns].setS(0);
-//                } else {
-//                    nodo[ns].setS(1);
-//                }
-//            }
-//        }
-//        }
-//        nodo[(int)(numNodos / 2) + 1].setS(tempCa[(int)(numNodos / 2) + 1]);
-//        
-//        
-//
-//    }
-
-//    public static double[] todoCoupledMayoriaChida(
-//            int iC, int numRedes, int numNodos, Red[][] r1) {
-//        int N = r1[0][0].getSize();
-//        int tMax = 1000;
-//        int[][][] trjs = new int[numRedes][tMax][N];
-////        int[][] trj;
-////        int[][] trj2;
-////        int[][] trj3;
-////        int[][] trj4;
-////        int[][] trj5;
-////        int[][] trj6;
-////        int[][] trj7;
-////        int[][] trj8;
-////        int[][] trj9;
-////        int[][] trj10;
-//        int[][] calcio;
-//        
-////        trj = new int[tMax][N];
-////        trj2 = new int[tMax][N];
-////        trj3 = new int[tMax][N];
-////        trj4 = new int[tMax][N];
-////        trj5 = new int[tMax][N];
-////        trj6 = new int[tMax][N];
-////        trj7 = new int[tMax][N];
-////        trj8 = new int[tMax][N];
-////        trj9 = new int[tMax][N];
-////        trj10 = new int[tMax][N];
-//        /*
-//         * ya me los chingue
-//         */
-//
-//        double[] sumota = new double[2];
-//        calcio = new int[tMax][numRedes];
-//        double[] calciote = new double[tMax];
-//        int t;
-//
-//        int[] transi = new int[2];
-//
-//        FileToWrite fw3 = new FileToWrite("ItalianCoupling/GoodCoupling/mayoria/10redeschida.dat");
-//        FileToWrite fw = new FileToWrite("ItalianCoupling/GoodCoupling/mayoria/10redesTransitorioschida.dat");
-//        System.out.println("abre archivos");
-//        /*
-//         * tienes que juntar unas subredes
-//         * para jugar al acople
-//         */
-//       
-//        
-//        for (int ic = 0; ic < iC; ++ic) {
-//            
-//for(int rs = 0; rs < numRedes; ++rs){
-//    for(int ss = 0; ss < numNodos; ++ss){
-//                r1[rs][ss].setRandomStates();
-//            System.out.println("genera estados iniciales aleatorios");
-////            r.setRandomStates();
-////            r2.setRandomStates();
-////            r3.setRandomStates();
-////            r4.setRandomStates();
-////            r5.setRandomStates();
-////            r6.setRandomStates();
-////            r7.setRandomStates();
-////            r8.setRandomStates();
-////            r9.setRandomStates();
-////            r10.setRandomStates();
-//
-//            /*
-//             * ya me los chingue
-//             */
-//            calcio[0][numRedes-1] = trjs[numRedes-1][0][N-1];
-////            calcio[0][0] = trj[0][N - 1];
-////            calcio[0][1] = trj2[0][N - 1];
-////            calcio[0][2] = trj3[0][N - 1];
-////            calcio[0][3] = trj4[0][N - 1];
-////            calcio[0][4] = trj5[0][N - 1];
-////            calcio[0][5] = trj6[0][N - 1];
-////            calcio[0][6] = trj7[0][N - 1];
-////            calcio[0][7] = trj8[0][N - 1];
-////            calcio[0][8] = trj9[0][N - 1];
-////            calcio[0][9] = trj10[0][N - 1];
-//            /*
-//             * ya me los chingue
-//             */
-//
-//            
-//            for (t = 1; t < tMax; ++t) {
-//                r1[rs][ss].evolveKauffmanMayoriaChida(r1[rs], numNodos);
-//                System.out.println("evolucion numero " + t);
-////                r.evolveKauffmanMayoria(r10, r, r2);
-////                r2.evolveKauffmanMayoria(r, r2, r3);
-////                r3.evolveKauffmanMayoria(r2, r3, r4);
-////                r4.evolveKauffmanMayoria(r3, r4, r5);
-////                r5.evolveKauffmanMayoria(r4, r5, r6);
-////                r6.evolveKauffmanMayoria(r5, r6, r7);
-////                r7.evolveKauffmanMayoria(r6, r7, r8);
-////                r8.evolveKauffmanMayoria(r7, r8, r9);
-////                r9.evolveKauffmanMayoria(r8, r9, r10);
-////                r10.evolveKauffmanMayoria(r9, r10, r);
-//
-//                int voltEfectivo = 0;
-//                double volt = 0;
-////                double volt = (r.getNodo(5).getS()
-////                        + r2.getNodo(5).getS()
-////                        + r3.getNodo(5).getS()
-////                        + r4.getNodo(5).getS()
-////                        + r5.getNodo(5).getS()
-////                        + r6.getNodo(5).getS()
-////                        + r7.getNodo(5).getS()
-////                        + r8.getNodo(5).getS()
-////                        + r9.getNodo(5).getS()
-////                        + r10.getNodo(5).getS()) / 10.0;
-//                for(int volRed = 0; volRed < numRedes; ++volRed){
-//                volt += r1[rs][volRed].getNodo(5).getS();
-//                        }
-//               volt /=numRedes;
-//                /*
-//                 * ya me los chingue
-//                 */
-//
-//                if (volt < 0.66) {
-//                    voltEfectivo = 0;
-//                } else if (volt >= 0.66 && volt < 1.33) {
-//                    voltEfectivo = 1;
-//                } else {
-//                    voltEfectivo = 2;
-//                }
-//
-//                for(int volRed = 0; volRed < numRedes; ++volRed){
-//                r1[rs][volRed].getNodo(5).setS(voltEfectivo);
-//                        }
-////                r.getNodo(5).setS(voltEfectivo);
-////                r2.getNodo(5).setS(voltEfectivo);
-////                r3.getNodo(5).setS(voltEfectivo);
-////                r4.getNodo(5).setS(voltEfectivo);
-////                r5.getNodo(5).setS(voltEfectivo);
-////                r6.getNodo(5).setS(voltEfectivo);
-////                r7.getNodo(5).setS(voltEfectivo);
-////                r8.getNodo(5).setS(voltEfectivo);
-////                r9.getNodo(5).setS(voltEfectivo);
-////                r10.getNodo(5).setS(voltEfectivo);
-//                /*
-//                 * ya me los chingue
-//                 */
-//
-//                /*
-//                 * Aqui acaba el rollo del voltaje isopotencial
-//                 */
-//
-//                //numRedes tMax N
-//                    trjs[rs][t] = r1[rs][ss].getStates();
-//                
-////                trj[t] = r.getStates();
-////                trj2[t] = r2.getStates();
-////                trj3[t] = r3.getStates();
-////                trj4[t] = r4.getStates();
-////                trj5[t] = r5.getStates();
-////                trj6[t] = r6.getStates();
-////                trj7[t] = r7.getStates();
-////                trj8[t] = r8.getStates();
-////                trj9[t] = r9.getStates();
-////                trj10[t] = r10.getStates();
-//                /*
-//                 * ya me los chingue
-//                 */
-//
-//                calcio[t][rs] = trjs[rs][t][N-1];
-//                System.out.println("valores del calcio");
-////                calcio[t][0] = trj[t][N - 1];
-////                calcio[t][1] = trj2[t][N - 1];
-////                calcio[t][2] = trj3[t][N - 1];
-////                calcio[t][3] = trj4[t][N - 1];
-////                calcio[t][4] = trj5[t][N - 1];
-////                calcio[t][5] = trj6[t][N - 1];
-////                calcio[t][6] = trj7[t][N - 1];
-////                calcio[t][7] = trj8[t][N - 1];
-////                calcio[t][8] = trj9[t][N - 1];
-////                calcio[t][9] = trj10[t][N - 1];
-//                /*
-//                 * ya me los chingue
-//                 */
-//
-//                for (int i = 0; i < 10; i++) {
-//                    calciote[t] += calcio[t][i];
-//                }
-//            }
-//
-//                stop:
-//                for (int m = 0; m < tMax - 1; ++m) {
-//                    for (int h = m + 1; h < tMax; ++h) {
-//
-//                        if (arrayEquals(calcio[m], calcio[h])) {
-//                            transi[0] = h;
-//                            m = tMax;
-//                            continue stop;
-//                        }
-//                    }
-//                }
-//
-//                stop2:
-//                for (int m = 0; m < tMax - 1; ++m) {
-//                    for (int h = m + 1; h < tMax; ++h) {
-//                        if (arrayEquals(trjs[rs][m], trjs[rs][h])) {
-//                            transi[1] = h;
-//                            m = tMax;
-//                            continue stop2;
-//                        }
-//                    }
-//                }
-//            
-//            fw.writeLine(ic + "\t" + transi[0]);
-//            sumota[0] += transi[0];
-//            sumota[1] += transi[1];
-//        }
-//}
-//    }
-//        for (int i = 0; i < tMax - 1; ++i) {
-//            for (int j = 0; j < 10; ++j) {
-//                fw3.writeString((calcio[i][j]) + "\t");
-//            }
-//            fw3.writeLine();
-//        }
-//        fw3.close();
-//        fw.close();
-//        sumota[0] = sumota[0] / iC;
-//        sumota[1] = sumota[1] / iC;
-//        return sumota;
-//    }
-
-    
-   
-public static void derridaMapCoupled(Red r1, Red r2,Red r3, Red r4,
-                                       Red r5, Red r6,Red r7, Red r8,
-                                       Red r9, Red r10,Red r11, Red r12, 
-                                       Red r13, Red r14,Red r15, Red r16, 
-                                       Red r17, Red r18,Red r19, Red r20,
-                                       int iC, double eps, double div, 
-                                       double rounder2, double rounder, int nodoAcoplador, 
-                                       String file) {
-    
-        int N = r1.getSize()*10;
+        int N = r1.getSize() * 10;
         int[] temp1 = new int[N];
         int[] temp2 = new int[N];
         double d1, d2;
@@ -5692,96 +5172,110 @@ public static void derridaMapCoupled(Red r1, Red r2,Red r3, Red r4,
         FileToWrite fw;
         for (int n = 0; n < r1.getSize(); ++n) {
             r1.getNodo(n).setPresente(true);
-            r2.getNodo(n).setPresente(true);r3.getNodo(n).setPresente(true);
-            r4.getNodo(n).setPresente(true);r5.getNodo(n).setPresente(true);
-            r6.getNodo(n).setPresente(true);r7.getNodo(n).setPresente(true);
-            r8.getNodo(n).setPresente(true);r9.getNodo(n).setPresente(true);
-            r10.getNodo(n).setPresente(true);r11.getNodo(n).setPresente(true);
-            r12.getNodo(n).setPresente(true);r13.getNodo(n).setPresente(true);
-            r14.getNodo(n).setPresente(true);r15.getNodo(n).setPresente(true);
-            r16.getNodo(n).setPresente(true);r17.getNodo(n).setPresente(true);
-            r18.getNodo(n).setPresente(true);r19.getNodo(n).setPresente(true);
+            r2.getNodo(n).setPresente(true);
+            r3.getNodo(n).setPresente(true);
+            r4.getNodo(n).setPresente(true);
+            r5.getNodo(n).setPresente(true);
+            r6.getNodo(n).setPresente(true);
+            r7.getNodo(n).setPresente(true);
+            r8.getNodo(n).setPresente(true);
+            r9.getNodo(n).setPresente(true);
+            r10.getNodo(n).setPresente(true);
+            r11.getNodo(n).setPresente(true);
+            r12.getNodo(n).setPresente(true);
+            r13.getNodo(n).setPresente(true);
+            r14.getNodo(n).setPresente(true);
+            r15.getNodo(n).setPresente(true);
+            r16.getNodo(n).setPresente(true);
+            r17.getNodo(n).setPresente(true);
+            r18.getNodo(n).setPresente(true);
+            r19.getNodo(n).setPresente(true);
             r20.getNodo(n).setPresente(true);
         }
         fw = new FileToWrite(file);
         d1 = 0;
         d2 = 0;
-        for (int d = 0; d <= 2*N/3; ++d) {
+        for (int d = 0; d <= 2 * N / 3; ++d) {
             d1 = 0;
             d2 = 0;
             for (int r = 0; r < rea; ++r) {
-                r1.setRandomStates(); r2.setRandomStates();r3.setRandomStates();r4.setRandomStates(); r5.setRandomStates();
-                r6.setRandomStates();r7.setRandomStates(); r8.setRandomStates();r9.setRandomStates(); r10.setRandomStates();
-                
-                
-                
-                setDistanceCoupled(r1, r2, 
-                        r3, r4,r5, r6,r7, 
-                        r8,r9, r10,r11, r12,
-                        r13, r14,r15,r16, r17,r18, r19, r20,
+                r1.setRandomStates();
+                r2.setRandomStates();
+                r3.setRandomStates();
+                r4.setRandomStates();
+                r5.setRandomStates();
+                r6.setRandomStates();
+                r7.setRandomStates();
+                r8.setRandomStates();
+                r9.setRandomStates();
+                r10.setRandomStates();
+
+                setDistanceCoupled(r1, r2,
+                        r3, r4, r5, r6, r7,
+                        r8, r9, r10, r11, r12,
+                        r13, r14, r15, r16, r17, r18, r19, r20,
                         d);
-                
-                for(int i = 0; i < r1.getSize(); ++i){
+
+                for (int i = 0; i < r1.getSize(); ++i) {
                     temp1[i] = r1.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*1)] = r2.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*2)] = r3.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*3)] = r4.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*4)] = r5.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*5)] = r6.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*6)] = r7.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*7)] = r8.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*8)] = r9.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*9)] = r10.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 1)] = r2.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 2)] = r3.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 3)] = r4.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 4)] = r5.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 5)] = r6.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 6)] = r7.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 7)] = r8.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 8)] = r9.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 9)] = r10.getNodo(i).getS();
                 }
-                
-                for(int i = 0; i < r1.getSize(); ++i){
+
+                for (int i = 0; i < r1.getSize(); ++i) {
                     temp2[i] = r11.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*1)] = r12.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*2)] = r13.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*3)] = r14.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*4)] = r15.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*5)] = r16.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*6)] = r17.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*7)] = r18.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*8)] = r19.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*9)] = r20.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 1)] = r12.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 2)] = r13.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 3)] = r14.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 4)] = r15.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 5)] = r16.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 6)] = r17.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 7)] = r18.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 8)] = r19.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 9)] = r20.getNodo(i).getS();
                 }
-                
+
 //                for(int i = 0; i < temp1.length; ++i){
 //                System.out.print(temp1[i] + " ");
 //                }System.out.println();
 //                for(int i = 0; i < temp1.length; ++i){
 //                System.out.print(temp2[i] + " ");
 //                }System.out.println("*************************");
-                
-                for(int i  = 0; i < temp1.length; ++i){
-                    
-                    if(temp1[i] != temp2[i]){
+                for (int i = 0; i < temp1.length; ++i) {
+
+                    if (temp1[i] != temp2[i]) {
                         d1++;
                     }
                 }
 //                d1/=temp1.length;
-                r1.evolveKauffmanCoupled(r10,r1,r2, eps,0,0,rounder2, rounder,0);
-                r2.evolveKauffmanCoupled(r1,r2,r3,eps, 0,0,rounder2, rounder,0);
-                r3.evolveKauffmanCoupled(r2,r3,r4,eps, 0,0,rounder2, rounder,0);
-                r4.evolveKauffmanCoupled(r3,r4,r5,eps, 0,0,rounder2, rounder,0);
-                r5.evolveKauffmanCoupled(r4,r5,r6,eps, 0,0,rounder2, rounder,0);
-                r6.evolveKauffmanCoupled(r5,r6,r7,eps, 0,0,rounder2, rounder,0);
-                r7.evolveKauffmanCoupled(r6,r7,r8,eps, 0,0,rounder2, rounder,0);
-                r8.evolveKauffmanCoupled(r7,r8,r9,eps, 0,0,rounder2, rounder,0);
-                r9.evolveKauffmanCoupled(r8,r9,r10,eps, 0,0,rounder2, rounder,0);
-                r10.evolveKauffmanCoupled(r9,r10,r1,eps, 0,0,rounder2, rounder,0);
-                r11.evolveKauffmanCoupled(r10,r11,r12,eps, 0,0,rounder2, rounder,0);
-                r12.evolveKauffmanCoupled(r11,r12,r13,eps, 0,0,rounder2, rounder,0);
-                r13.evolveKauffmanCoupled(r12,r13,r14,eps, 0,0,rounder2, rounder,0);
-                r14.evolveKauffmanCoupled(r13,r14,r15,eps, 0,0,rounder2, rounder,0);
-                r15.evolveKauffmanCoupled(r14,r15,r16,eps, 0,0,rounder2, rounder,0);
-                r16.evolveKauffmanCoupled(r15,r16,r17,eps, 0,0,rounder2, rounder,0);
-                r17.evolveKauffmanCoupled(r16,r17,r18,eps, 0,0,rounder2, rounder,0);
-                r18.evolveKauffmanCoupled(r17,r18,r19,eps, 0,0,rounder2, rounder,0);
-                r19.evolveKauffmanCoupled(r18,r19,r20,eps, 0,0,rounder2, rounder,0);
-                r20.evolveKauffmanCoupled(r19,r20,r11,eps, 0,0,rounder2, rounder,0);
-                
+                r1.evolveKauffmanCoupled(r10, r1, r2, eps, 0, 0, rounder2, rounder, 0);
+                r2.evolveKauffmanCoupled(r1, r2, r3, eps, 0, 0, rounder2, rounder, 0);
+                r3.evolveKauffmanCoupled(r2, r3, r4, eps, 0, 0, rounder2, rounder, 0);
+                r4.evolveKauffmanCoupled(r3, r4, r5, eps, 0, 0, rounder2, rounder, 0);
+                r5.evolveKauffmanCoupled(r4, r5, r6, eps, 0, 0, rounder2, rounder, 0);
+                r6.evolveKauffmanCoupled(r5, r6, r7, eps, 0, 0, rounder2, rounder, 0);
+                r7.evolveKauffmanCoupled(r6, r7, r8, eps, 0, 0, rounder2, rounder, 0);
+                r8.evolveKauffmanCoupled(r7, r8, r9, eps, 0, 0, rounder2, rounder, 0);
+                r9.evolveKauffmanCoupled(r8, r9, r10, eps, 0, 0, rounder2, rounder, 0);
+                r10.evolveKauffmanCoupled(r9, r10, r1, eps, 0, 0, rounder2, rounder, 0);
+                r11.evolveKauffmanCoupled(r10, r11, r12, eps, 0, 0, rounder2, rounder, 0);
+                r12.evolveKauffmanCoupled(r11, r12, r13, eps, 0, 0, rounder2, rounder, 0);
+                r13.evolveKauffmanCoupled(r12, r13, r14, eps, 0, 0, rounder2, rounder, 0);
+                r14.evolveKauffmanCoupled(r13, r14, r15, eps, 0, 0, rounder2, rounder, 0);
+                r15.evolveKauffmanCoupled(r14, r15, r16, eps, 0, 0, rounder2, rounder, 0);
+                r16.evolveKauffmanCoupled(r15, r16, r17, eps, 0, 0, rounder2, rounder, 0);
+                r17.evolveKauffmanCoupled(r16, r17, r18, eps, 0, 0, rounder2, rounder, 0);
+                r18.evolveKauffmanCoupled(r17, r18, r19, eps, 0, 0, rounder2, rounder, 0);
+                r19.evolveKauffmanCoupled(r18, r19, r20, eps, 0, 0, rounder2, rounder, 0);
+                r20.evolveKauffmanCoupled(r19, r20, r11, eps, 0, 0, rounder2, rounder, 0);
+
                 int voltEfectivo = 0;
                 double volt = (r1.getNodo(5).getS()
                         + r2.getNodo(5).getS()
@@ -5812,7 +5306,6 @@ public static void derridaMapCoupled(Red r1, Red r2,Red r3, Red r4,
 //                r8.getNodo(5).setS(voltEfectivo);
 //                r9.getNodo(5).setS(voltEfectivo);
 //                r10.getNodo(5).setS(voltEfectivo);
-                
                 int volt2Efectivo = 0;
                 double volt2 = (r1.getNodo(5).getS()
                         + r2.getNodo(5).getS()
@@ -5843,50 +5336,46 @@ public static void derridaMapCoupled(Red r1, Red r2,Red r3, Red r4,
 //                r8.getNodo(5).setS(volt2Efectivo);
 //                r9.getNodo(5).setS(volt2Efectivo);
 //                r10.getNodo(5).setS(volt2Efectivo);
-            
-                for(int i = 0; i < r1.getSize(); ++i){
+                for (int i = 0; i < r1.getSize(); ++i) {
                     temp1[i] = r1.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*1)] = r2.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*2)] = r3.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*3)] = r4.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*4)] = r5.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*5)] = r6.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*6)] = r7.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*7)] = r8.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*8)] = r9.getNodo(i).getS();
-                    temp1[i+(r1.getSize()*9)] = r10.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 1)] = r2.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 2)] = r3.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 3)] = r4.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 4)] = r5.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 5)] = r6.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 6)] = r7.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 7)] = r8.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 8)] = r9.getNodo(i).getS();
+                    temp1[i + (r1.getSize() * 9)] = r10.getNodo(i).getS();
                 }
-                
-                for(int i = 0; i < r1.getSize(); ++i){
+
+                for (int i = 0; i < r1.getSize(); ++i) {
                     temp2[i] = r11.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*1)] = r12.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*2)] = r13.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*3)] = r14.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*4)] = r15.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*5)] = r16.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*6)] = r17.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*7)] = r18.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*8)] = r19.getNodo(i).getS();
-                    temp2[i+(r1.getSize()*9)] = r20.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 1)] = r12.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 2)] = r13.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 3)] = r14.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 4)] = r15.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 5)] = r16.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 6)] = r17.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 7)] = r18.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 8)] = r19.getNodo(i).getS();
+                    temp2[i + (r1.getSize() * 9)] = r20.getNodo(i).getS();
                 }
-                
-                
+
 //                for(int i = 0; i < temp1.length; ++i){
 //                System.out.print(temp1[i] + " ");
 //                }System.out.println();
 //                for(int i = 0; i < temp1.length; ++i){
 //                System.out.print(temp2[i] + " ");
 //                }System.out.println("\n\n\n");
-                
-                
-                for(int i  = 0; i < temp1.length; ++i){
-                    if(temp1[i] != temp2[i]){
+                for (int i = 0; i < temp1.length; ++i) {
+                    if (temp1[i] != temp2[i]) {
                         d2++;
                     }
                 }
 //                d2/=temp1.length;
             }
-            
+
             d1 /= rea;
             d2 /= rea;
             fw.writeLine(d1 + "\t\t" + (d2));
@@ -5899,30 +5388,39 @@ public static void derridaMapCoupled(Red r1, Red r2,Red r3, Red r4,
 //        }
     }
 
-
-public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
-                                       Red r5, Red r6,Red r7, Red r8,
-                                       Red r9, Red r10,Red r11, Red r12, 
-                                       Red r13, Red r14,Red r15, Red r16, 
-                                       Red r17, Red r18,Red r19, Red r20, int d) {
-        int N = r1.getSize()*10;
+    public static void setDistanceCoupled(Red r1, Red r2, Red r3, Red r4,
+            Red r5, Red r6, Red r7, Red r8,
+            Red r9, Red r10, Red r11, Red r12,
+            Red r13, Red r14, Red r15, Red r16,
+            Red r17, Red r18, Red r19, Red r20, int d) {
+        int N = r1.getSize() * 10;
         int M = N;
-        int s1, s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20, i, n;
+        int s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, i, n;
         int[] st = new int[N];
         int[] rst = new int[d];
 
         for (n = 0; n < r1.getSize(); ++n) {
             st[n] = n;
-            s1 = r1.getNodo(n).getS();r11.getNodo(n).setS(s1);
-            s2 = r2.getNodo(n).getS();r12.getNodo(n).setS(s2);
-            s3 = r3.getNodo(n).getS();r13.getNodo(n).setS(s3);
-            s4 = r4.getNodo(n).getS();r14.getNodo(n).setS(s4);
-            s5 = r5.getNodo(n).getS();r15.getNodo(n).setS(s5);
-            s6 = r6.getNodo(n).getS();r16.getNodo(n).setS(s6);
-            s7 = r7.getNodo(n).getS();r17.getNodo(n).setS(s7);
-            s8 = r8.getNodo(n).getS();r18.getNodo(n).setS(s8);
-            s9 = r9.getNodo(n).getS();r19.getNodo(n).setS(s9);
-            s10 = r10.getNodo(n).getS();r20.getNodo(n).setS(s10);
+            s1 = r1.getNodo(n).getS();
+            r11.getNodo(n).setS(s1);
+            s2 = r2.getNodo(n).getS();
+            r12.getNodo(n).setS(s2);
+            s3 = r3.getNodo(n).getS();
+            r13.getNodo(n).setS(s3);
+            s4 = r4.getNodo(n).getS();
+            r14.getNodo(n).setS(s4);
+            s5 = r5.getNodo(n).getS();
+            r15.getNodo(n).setS(s5);
+            s6 = r6.getNodo(n).getS();
+            r16.getNodo(n).setS(s6);
+            s7 = r7.getNodo(n).getS();
+            r17.getNodo(n).setS(s7);
+            s8 = r8.getNodo(n).getS();
+            r18.getNodo(n).setS(s8);
+            s9 = r9.getNodo(n).getS();
+            r19.getNodo(n).setS(s9);
+            s10 = r10.getNodo(n).getS();
+            r20.getNodo(n).setS(s10);
         }
 
         --M;
@@ -5935,12 +5433,17 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
 
         for (n = 0; n < d; ++n) {
             i = rst[n];
-            s1 = r1.getNodo(i).getS();s2 = r2.getNodo(i).getS();
-            s3 = r3.getNodo(i).getS();s4 = r4.getNodo(i).getS();
-            s5 = r5.getNodo(i).getS();s6 = r6.getNodo(i).getS();
-            s7 = r7.getNodo(i).getS();s8 = r8.getNodo(i).getS();
-            s9 = r9.getNodo(i).getS();s10 = r10.getNodo(i).getS();
-            
+            s1 = r1.getNodo(i).getS();
+            s2 = r2.getNodo(i).getS();
+            s3 = r3.getNodo(i).getS();
+            s4 = r4.getNodo(i).getS();
+            s5 = r5.getNodo(i).getS();
+            s6 = r6.getNodo(i).getS();
+            s7 = r7.getNodo(i).getS();
+            s8 = r8.getNodo(i).getS();
+            s9 = r9.getNodo(i).getS();
+            s10 = r10.getNodo(i).getS();
+
             if (r1.getNodo(i).isBinary()) {
                 s11 = 1 - s1;
             } else {
@@ -5955,7 +5458,7 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r11.getNodo(i).setS(s11);
-            
+
             if (r2.getNodo(i).isBinary()) {
                 s12 = 1 - s2;
             } else {
@@ -5970,8 +5473,8 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r12.getNodo(i).setS(s12);
-            
-        if (r3.getNodo(i).isBinary()) {
+
+            if (r3.getNodo(i).isBinary()) {
                 s13 = 1 - s3;
             } else {
                 if (s3 == 0) {
@@ -5985,8 +5488,7 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r13.getNodo(i).setS(s13);
-        
-            
+
             if (r4.getNodo(i).isBinary()) {
                 s14 = 1 - s4;
             } else {
@@ -6001,7 +5503,7 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r14.getNodo(i).setS(s14);
-            
+
             if (r5.getNodo(i).isBinary()) {
                 s15 = 1 - s5;
             } else {
@@ -6016,8 +5518,7 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r15.getNodo(i).setS(s15);
-            
-            
+
             if (r6.getNodo(i).isBinary()) {
                 s16 = 1 - s6;
             } else {
@@ -6032,8 +5533,7 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r16.getNodo(i).setS(s16);
-            
-            
+
             if (r7.getNodo(i).isBinary()) {
                 s17 = 1 - s7;
             } else {
@@ -6048,7 +5548,7 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r17.getNodo(i).setS(s17);
-            
+
             if (r8.getNodo(i).isBinary()) {
                 s18 = 1 - s8;
             } else {
@@ -6063,7 +5563,7 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r18.getNodo(i).setS(s18);
-            
+
             if (r9.getNodo(i).isBinary()) {
                 s19 = 1 - s9;
             } else {
@@ -6078,7 +5578,7 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
                 }
             }
             r19.getNodo(i).setS(s19);
-            
+
             if (r10.getNodo(i).isBinary()) {
                 s20 = 1 - s10;
             } else {
@@ -6095,23 +5595,20 @@ public static void setDistanceCoupled(Red r1, Red r2,Red r3, Red r4,
             r20.getNodo(i).setS(s20);
         }
 
-      
     }
 
-
-
-public static void max(){
-    FileToWrite fw = new FileToWrite("cAMPCoupled.dat");
-    for(double i = 0; i < 1; i +=0.01){
-        double sumotaCa = 0;
-        FileToRead fr = new FileToRead("/home/chucho/Coupled/AcopleMayo12/DeTablasYA/Isopotencial/cAMPAcoplado/2Rounder_0.5_trans_eps_" + i + "_div_1.0_.dat");
-        for(int n=0; n <1000; ++n){
-            sumotaCa += fr.nextInt();
+    public static void max() {
+        FileToWrite fw = new FileToWrite("cAMPCoupled.dat");
+        for (double i = 0; i < 1; i += 0.01) {
+            double sumotaCa = 0;
+            FileToRead fr = new FileToRead("/home/chucho/Coupled/AcopleMayo12/DeTablasYA/Isopotencial/cAMPAcoplado/2Rounder_0.5_trans_eps_" + i + "_div_1.0_.dat");
+            for (int n = 0; n < 1000; ++n) {
+                sumotaCa += fr.nextInt();
+            }
+            fr.close();
+            sumotaCa /= 1000.0;
+            fw.writeLine(i + "\t" + sumotaCa);
         }
-        fr.close();
-        sumotaCa/=1000.0;
-        fw.writeLine(i + "\t" + sumotaCa);
+        fw.close();
     }
-    fw.close();
-}
 }
