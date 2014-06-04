@@ -36,123 +36,6 @@ public class Nodo {
         // Asigna el valor del coeficiente de relajacion
         alpha = 1;
 
-        // Determina si el nodo es binario o ternario
-        // para poder asignar uno o dos thresholds. 
-
-        //*****************************
-        //esta repetición es para que se aplique con el nuevo
-        //mapeo de Derrida xq Ca solo tiene 2 valores.
-        //********************************
-
-//        if(nombre.equals("5_v")){
-//            binario = false;
-//            thr = new double[4];
-//            thr[0] = 0;
-//            thr[1] = 0.666;
-//            thr[2] = 1.333;
-//            thr[3] = 2;
-//            maxThr = 2;
-//        }
-
-
-        /*
-         * Tablas de Caulobacter
-         */
-        if (nombre.equals("5_CtrAD") | nombre.equals("6_ChpT")) {
-            binario = false;
-            thr = new double[4];
-            thr[0] = 0;
-            thr[1] = 0.666;
-            thr[2] = 1.333;
-            thr[3] = 2;
-            maxThr = 2;
-        } else if (nombre.equals("8_DivK")) {
-            binario = false;
-            thr = new double[4];
-            thr[0] = 0;
-            thr[1] = 0.666;
-            thr[2] = 1.333;
-            thr[3] = 2;
-            maxThr = 2;
-        } else if (nombre.equals("9_PleC")) {
-            binario = false;
-            thr = new double[4];
-            thr[0] = 0;
-            thr[1] = 0.666;
-            thr[2] = 1.333;
-            thr[3] = 2;
-            maxThr = 2;
-        }else if (nombre.equals("10_DivJ")) {
-            binario = false;
-            thr = new double[4];
-            thr[0] = 0;
-            thr[1] = 0.666;
-            thr[2] = 1.333;
-            thr[3] = 2;
-            maxThr = 2;
-        }else if (nombre.equals("12_CckA")) {
-            binario = false;
-            thr = new double[4];
-            thr[0] = 0;
-            thr[1] = 0.666;
-            thr[2] = 1.333;
-            thr[3] = 2;
-            maxThr = 2;
-        }else if (nombre.equals("13_CpdR")) {
-            binario = false;
-            thr = new double[4];
-            thr[0] = 0;
-            thr[1] = 0.666;
-            thr[2] = 1.333;
-            thr[3] = 2;
-            maxThr = 2;
-        }else {
-            binario = true;
-            thr = new double[3];
-            thr[0] = 0;
-            thr[1] = 0.5;
-            thr[2] = 1;
-            maxThr = 1;
-        }
-        
-        
-
-
-//        if (nombre.equals("4_v") | nombre.equals("6_Ca")) {
-//            binario = false;
-//            thr = new double[4];
-//            thr[0] = 0;
-//            thr[1] = 0.666;
-//            thr[2] = 1.333;
-//            thr[3] = 2;
-//            maxThr = 2;
-//        } else if (nombre.equals("10_LVA")) {
-//            binario = false;
-//            thr = new double[4];
-//            thr[0] = 0;
-//            thr[1] = 0.666;
-//            thr[2] = 1.333;
-//            thr[3] = 2;
-//            maxThr = 2;
-//        } else if (nombre.equals("14_HVA")) {
-//            binario = false;
-//            thr = new double[4];
-//            thr[0] = 0;
-//            thr[1] = 0.666;
-//            thr[2] = 1.333;
-//            thr[3] = 2;
-//            maxThr = 2;
-//        } 
-//        else {
-//            binario = true;
-//            thr = new double[3];
-//            thr[0] = 0;
-//            thr[1] = 0.5;
-//            thr[2] = 1;
-//            maxThr = 1;
-//        }
-
-
         // Ahora comenzara a leer los datos del archivo
         String fileName = directorio + nombre + ".txt";
         FileToRead fr = new FileToRead(fileName);
@@ -209,45 +92,21 @@ public class Nodo {
         }
 
         int[] nt = new int[numReg];
-int contadorRenglones =0;
+        int contadorRenglones = 0;
         while (fr.hasNextInt()) {
             contadorRenglones++;
-//            for(int fila = 0; fila <funReg.length; ++fila){//linea chucho pa la tabla del switch}
             for (n = 0; n < numReg; ++n) {
-                nt[n] = fr.nextInt();
-
-//                if(funReg[n]!=-1){//linea chucho
-//                tabla[fila] = nt[n];//linea de Chucho pa atractores Switch
-//                }//linea chucho
-               
+                nt[n] = fr.nextInt();              
             }
-//        }//linea chucho cierra for fila
+
             Integer M;
             m = Methods.ternaryToInt(nt);
             M=m;
-//            table.add(m);//linea chucho
 
             reng = M;
              table.add(new Integer(reng));//linea chucho
 
-//             if(table.contains(M)){
-//                 System.out.println("indice de M "+table.indexOf(M)+
-//                         " valor del renglon: " + table.get(table.indexOf(M)));
-//
-//             }
-//            funReg[m] = fr.nextInt();
              funReg[reng] = fr.nextInt();  //linea chucho sustituye la de arriba
-
-//              System.out.println("nodo " + n + " Size " +table.size() + "valor del renglon " +  table.get(reng));
-//             if(funReg[m]!=-1){//linea chucho
-//int k = Methods.ternaryToInt(nt);
-//                table.add(k);//linea chucho
-//                }
-            
-//            for(int fila = 0; fila < funReg.length; ++ fila){
-//                System.out.println("Size " +table.size() + "\nfuncion reguladora " +funReg.length + "\nrenglon nodo "+table.get(n));
-//                }
-          //fin for renglon linea chucho
         }
 
        
@@ -276,8 +135,6 @@ int contadorRenglones =0;
         else{
             thr[0] = 0;
             thr[1] = 0.666;
-//            thr[2] = 1.333;
-//            thr[3] = 1.999;
         }
     }
 

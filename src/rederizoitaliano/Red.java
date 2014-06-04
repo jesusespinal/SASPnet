@@ -145,14 +145,6 @@ public class Red {
         Methods.evolveReglaMayoria(n1, n2, n3);
     }
     
-//    public void evolveKauffmanMayoriaChida(Red[] r, int numNodos){
-////        ArrayList<Nodo[]> nodo = new ArrayList<Nodo[]>();
-//        Nodo[] nodo = new Nodo[numNodos];
-////        for(int n = 0; n < numNodos; ++n){
-////            nodo.add(n, nn);
-////        }
-//        Methods.evolveReglaMayoriaChida(numNodos, nodo);
-//    }
     
     public void evolveKauffmanCoupled(Red r1, Red r2, Red r3, double eps, double div, int pos, double rounder2, double rounder, int NodoAcoplador) {
         Nodo[] nodo1 = r1.nn;
