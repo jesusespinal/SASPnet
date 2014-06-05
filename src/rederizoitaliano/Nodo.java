@@ -46,12 +46,15 @@ public class Nodo {
 
         // Asigna un valor a la concentracion (double) de forma aleatoria
         // pero consistente con el estado entero que acaba de leer.
-        for (n = 0; n < (thr.length - 1); ++n) {
-            if ((thr[n] <= stInt) && (stInt <= thr[n + 1])) {
-                stDou = thr[n] + ((thr[n + 1] - thr[n]) * Math.random());
-                break;
+  
+
+            for (n = 0; n < (thr.length - 1); ++n) {
+                if ((thr[n] <= stInt) && (stInt <= thr[n + 1])) {
+                    stDou = thr[n] + ((thr[n + 1] - thr[n]) * Math.random());
+                    break;
+                }
             }
-        }
+
 
         // Lee el numero de reguladores y despues lee los nombres de los
         // reguladores extrayendolos como tokens de una linea
@@ -71,8 +74,8 @@ public class Nodo {
             if (i != -1) {
                 regInt[n] = i;
             } else {
-                System.out.println("No encontro el nombre en " +
-                        "la lista para el regulador " + n + ": " + regNom[n]);
+                System.out.println("No encontro el nombre en "
+                        + "la lista para el regulador " + n + ": " + regNom[n]);
                 System.out.println("este pertenece al gen " + nombre);
                 System.exit(0);
             }
@@ -83,7 +86,7 @@ public class Nodo {
         // voltaje (y el calcio en su caso y los HVA y LVA) es ternaria.
         //A todas las demas funciones las considera
         // como ternarias pero las entradas que no existen las llena con -1's
-         int numConf = (int) (Math.pow(3, numReg));
+        int numConf = (int) (Math.pow(3, numReg));
 //        int numConf = (int) (Math.pow(2, numReg));
         funReg = new int[numConf];
         funRegIni = new int[numConf];
@@ -96,28 +99,27 @@ public class Nodo {
         while (fr.hasNextInt()) {
             contadorRenglones++;
             for (n = 0; n < numReg; ++n) {
-                nt[n] = fr.nextInt();              
+                nt[n] = fr.nextInt();
             }
 
             Integer M;
             m = Methods.ternaryToInt(nt);
-            M=m;
+            M = m;
 
             reng = M;
-             table.add(new Integer(reng));//linea chucho
+            table.add(new Integer(reng));//linea chucho
 
-             funReg[reng] = fr.nextInt();  //linea chucho sustituye la de arriba
+            funReg[reng] = fr.nextInt();  //linea chucho sustituye la de arriba
         }
 
-       
         fr.close();
         for (n = 0; n < funReg.length; ++n) {
             funRegIni[n] = funReg[n];
         }
-          // Ahora determina el tipo de nodo, leyendo los valores de la fucion booleana.
+        // Ahora determina el tipo de nodo, leyendo los valores de la fucion booleana.
         tipo = 0;
-        for(n = 0; n < funReg.length; ++n){
-            if(funReg[n] > tipo){
+        for (n = 0; n < funReg.length; ++n) {
+            if (funReg[n] > tipo) {
                 tipo = funReg[n];
             }
         }
@@ -127,12 +129,11 @@ public class Nodo {
         // o vale 3 si la funcion es ternaria. Con esto podemos contruir los
         // thresholds, que se asignaran de manera equitativa.
         thr = new double[tipo + 1];
-        if(tipo == 2){
+        if (tipo == 2) {
             thr[0] = 0;
-            thr[1] = 0.5;
-            thr[2] = 1;
-        }
-        else{
+            thr[1] = 0.6;
+            thr[2] = 1.1;
+        } else {
             thr[0] = 0;
             thr[1] = 0.666;
         }
@@ -151,9 +152,10 @@ public class Nodo {
     }
 
     // *************** INTERFACE PUBLICA ****************
-     public int getType(){
+    public int getType() {
         return tipo;
     }
+
     public int getS() {
         return stInt;
     }
@@ -190,8 +192,6 @@ public class Nodo {
         return binario;
     }
 
-  
-
     public int[] getFunc() {
         return funReg;
     }
@@ -201,8 +201,9 @@ public class Nodo {
     }
 
     /**
-     * Asigna el valor discreto al estado del nodo. Se asegura de que
-     * el valor este dentro del rango.
+     * Asigna el valor discreto al estado del nodo. Se asegura de que el valor
+     * este dentro del rango.
+     *
      * @param s
      */
     public void setS(int s) {
@@ -216,8 +217,9 @@ public class Nodo {
     }
 
     /**
-     * Asigna el valor continuo a la concentracion del nodo.
-     * Se asegura de que el valor este dentro del rango.
+     * Asigna el valor continuo a la concentracion del nodo. Se asegura de que
+     * el valor este dentro del rango.
+     *
      * @param c
      */
     public void setC(double c) {
@@ -250,53 +252,55 @@ public class Nodo {
         funReg[k] = f;
     }
 
-      public int getFuncVal(int i) {
+    public int getFuncVal(int i) {
         return funReg[i];
     }
 
-/**
- * Cambia el valor de la función discreta de
- * un nodo, si es binario no hay bronca, pero si
- * es ternario no es tan exacta.
- * @param n el índice del nodo a suichear
- */
+    /**
+     * Cambia el valor de la función discreta de un nodo, si es binario no hay
+     * bronca, pero si es ternario no es tan exacta.
+     *
+     * @param n el índice del nodo a suichear
+     */
     public int getSwitchFuncVal(int n) {
 //        for (n = 0; n < funReg.length; ++n) {
-            if (binario) {
-                funReg[n] = (funReg[n] + 1) % 2;
-            }
-            else {
-                funReg[n] = (funReg[n] + 1) % 3;
-            }
+        if (binario) {
+            funReg[n] = (funReg[n] + 1) % 2;
+        } else {
+            funReg[n] = (funReg[n] + 1) % 3;
+        }
 //        }
         return funReg[n];
     }
- public int getSwitchFuncVal2(int n) {
+
+    public int getSwitchFuncVal2(int n) {
 //        for (n = 0; n < funReg.length; ++n) {
-            if (binario) {
-                if( funReg[n] ==0 )
-                    funReg[n] =1;
-                else funReg[n] =0;
+        if (binario) {
+            if (funReg[n] == 0) {
+                funReg[n] = 1;
+            } else {
+                funReg[n] = 0;
             }
-            else {
-               if (funReg[n] == 0){
-                   funReg[n]=2;}
-               else if(funReg[n] == 1){
-                   funReg[n]=0;}
-               else funReg[n] = 0;
+        } else {
+            if (funReg[n] == 0) {
+                funReg[n] = 2;
+            } else if (funReg[n] == 1) {
+                funReg[n] = 0;
+            } else {
+                funReg[n] = 0;
+            }
 
-            }
+        }
 //        }
         return funReg[n];
     }
 
-  public int getNoiseFuncVal(int n) {
-      double r = Math.random();
-        if (r<0.1) {
+    public int getNoiseFuncVal(int n) {
+        double r = Math.random();
+        if (r < 0.1) {
             if (binario) {
                 funReg[n] = (funReg[n] + 1) % 2;
-            }
-            else {
+            } else {
                 funReg[n] = (funReg[n] + 1) % 3;
             }
         }
